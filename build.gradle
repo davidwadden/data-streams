@@ -22,6 +22,7 @@ apply plugin: 'org.junit.platform.gradle.plugin'
 ext {
     junitVersion = '5.0.0-M3'
 }
+ext['spring.version'] = '5.0.0.M3'
 
 jar {
 	baseName = 'streams'
@@ -57,6 +58,6 @@ dependencyManagement {
 	}
 }
 
-ext['spring.version'] = '5.0.0.M3'
-
 configurations.all { exclude group: 'junit', module: 'junit' }
+
+//junitPlatform.platformVersion = '1.0.0-M2'
