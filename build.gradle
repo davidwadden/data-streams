@@ -46,8 +46,9 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    // see: https://github.com/junit-team/junit5/issues/586#issuecomment-265012600
+    testCompile("org.junit.platform:junit-platform-launcher:${junitPluginVersion}")
     testCompileOnly('org.projectlombok:lombok')
-
 }
 
 dependencyManagement {
