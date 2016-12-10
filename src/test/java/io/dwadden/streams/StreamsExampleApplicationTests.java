@@ -1,4 +1,4 @@
-package io.dwadden;
+package io.dwadden.streams;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package io.dwadden;
+package io.dwadden.streams;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
