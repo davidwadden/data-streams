@@ -2,10 +2,8 @@ package io.dwadden.streams;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +20,13 @@ import java.net.URISyntaxException;
 @Component
 public class FakeGateway {
 
+    StreamsExampleConfiguration configuration;
     RestOperations restOperations;
 
-    @Value("${fakeGateway.endpoint}")
-    @NonFinal
-    String endpoint;
-
     @Autowired
-    public FakeGateway(RestOperations restOperations) {
+    public FakeGateway(StreamsExampleConfiguration configuration,
+                       RestOperations restOperations) {
+        this.configuration = configuration;
         this.restOperations = restOperations;
     }
 
@@ -41,7 +38,7 @@ public class FakeGateway {
             .build();
 
         RequestEntity<IngestedPayload> requestEntity = RequestEntity
-            .post(new URI("http://localhost:8080/ingest"))
+            .post(new URI(configuration.getFakeGatewayEndpoint()))
             .contentType(MediaType.APPLICATION_JSON)
             .body(ingestedPayload);
 

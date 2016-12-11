@@ -1,6 +1,10 @@
 package io.dwadden.streams;
 
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
 import org.apache.catalina.filters.RequestDumperFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,9 +15,14 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.Filter;
 
 @SuppressWarnings("unused")
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Data
 @EnableScheduling
 @Configuration
 public class StreamsExampleConfiguration {
+
+    @Value("${fakeGateway.endpoint}")
+    String fakeGatewayEndpoint;
 
     @Bean
     public RestOperations restOperations() {
