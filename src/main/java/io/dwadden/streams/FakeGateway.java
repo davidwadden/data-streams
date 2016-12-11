@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 @SuppressWarnings("unused")
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -33,14 +32,14 @@ public class FakeGateway {
     }
 
     @Scheduled(fixedDelayString = "${fakeGateway.fixedDelay}")
-    public void uploadPayload() throws URISyntaxException {
+    public void uploadPayload() {
         IngestedPayload ingestedPayload = IngestedPayload.builder()
             .type("some-type")
             .payload("some-payload")
             .build();
 
         RequestEntity<IngestedPayload> requestEntity = RequestEntity
-            .post(new URI(fakeGatewayConfiguration.getEndpoint()))
+            .post(URI.create(fakeGatewayConfiguration.getEndpoint()))
             .contentType(MediaType.APPLICATION_JSON)
             .body(ingestedPayload);
 

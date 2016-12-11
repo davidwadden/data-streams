@@ -14,12 +14,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.test.web.client.response.MockRestResponseCreators;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import java.net.URISyntaxException;
 
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -52,7 +49,7 @@ class FakeGatewayTest {
 
     @DisplayName("should upload the payload to the endpoint")
     @Test
-    void uploadPayload() throws URISyntaxException {
+    void uploadPayload() {
         fakeGatewayConfiguration.setEndpoint("http://some-host/some-endpoint");
 
         mockServer.expect(requestTo("http://some-host/some-endpoint"))
