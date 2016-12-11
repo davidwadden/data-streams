@@ -22,14 +22,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public class StreamsExampleApplicationTests {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class StreamsExampleApplicationTests {
 
     static ObjectMapper objectMapper = new ObjectMapper();
 
-    @SuppressWarnings("unused")
+    final TestRestTemplate testRestTemplate;
+
     @Autowired
-    TestRestTemplate testRestTemplate;
+    StreamsExampleApplicationTests(TestRestTemplate testRestTemplate) {
+        this.testRestTemplate = testRestTemplate;
+    }
 
     @DisplayName("should autowire successfully")
     @Test
