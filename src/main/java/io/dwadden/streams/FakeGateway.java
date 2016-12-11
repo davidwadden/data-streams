@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -17,16 +18,17 @@ import java.net.URISyntaxException;
 @SuppressWarnings("unused")
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Slf4j
+@EnableConfigurationProperties
 @Component
 public class FakeGateway {
 
-    StreamsExampleConfiguration configuration;
+    FakeGatewayConfiguration fakeGatewayConfiguration;
     RestOperations restOperations;
 
     @Autowired
-    public FakeGateway(StreamsExampleConfiguration configuration,
+    public FakeGateway(FakeGatewayConfiguration fakeGatewayConfiguration,
                        RestOperations restOperations) {
-        this.configuration = configuration;
+        this.fakeGatewayConfiguration = fakeGatewayConfiguration;
         this.restOperations = restOperations;
     }
 
@@ -38,7 +40,7 @@ public class FakeGateway {
             .build();
 
         RequestEntity<IngestedPayload> requestEntity = RequestEntity
-            .post(new URI(configuration.getFakeGatewayEndpoint()))
+            .post(new URI(fakeGatewayConfiguration.getEndpoint()))
             .contentType(MediaType.APPLICATION_JSON)
             .body(ingestedPayload);
 

@@ -8,27 +8,36 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.response.MockRestResponseCreators;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.net.URISyntaxException;
 
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withNoContent;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@ContextConfiguration(classes = {
+    FakeGateway.class,
+    FakeGatewayTest.ContextConfiguration.class,
+})
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 class FakeGatewayTest {
 
     @SuppressWarnings("unused")
     @SpyBean
-    StreamsExampleConfiguration configuration;
+    FakeGatewayConfiguration fakeGatewayConfiguration;
 
     MockRestServiceServer mockServer;
     FakeGateway fakeGateway;
@@ -38,23 +47,35 @@ class FakeGatewayTest {
     void setUp() {
         RestTemplate restTemplate = new RestTemplate();
         mockServer = MockRestServiceServer.createServer(restTemplate);
-        fakeGateway = new FakeGateway(configuration, restTemplate);
+        fakeGateway = new FakeGateway(fakeGatewayConfiguration, restTemplate);
     }
 
     @DisplayName("should upload the payload to the endpoint")
     @Test
     void uploadPayload() throws URISyntaxException {
-        configuration.setFakeGatewayEndpoint("http://some-host/some-endpoint");
+        fakeGatewayConfiguration.setEndpoint("http://some-host/some-endpoint");
 
         mockServer.expect(requestTo("http://some-host/some-endpoint"))
             .andExpect(method(HttpMethod.POST))
-            .andRespond(MockRestResponseCreators.withNoContent());
+            .andRespond(withNoContent());
 
         fakeGateway.uploadPayload();
 
         mockServer.verify();
 
-        verify(configuration, times(2)).getFakeGatewayEndpoint();
+        verify(fakeGatewayConfiguration).getEndpoint();
+    }
+
+    @SuppressWarnings("unused")
+    @EnableWebMvc
+    @Configuration
+    static class ContextConfiguration {
+
+        @Bean
+        public RestOperations restOperations() {
+            return new RestTemplate();
+        }
+
     }
 
 }
