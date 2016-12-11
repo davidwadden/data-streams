@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -28,6 +29,7 @@ class FakeGatewayTest {
         fakeGateway = new FakeGateway(restTemplate);
     }
 
+    @DisplayName("should upload the payload to the endpoint")
     @Test
     void uploadPayload() throws URISyntaxException {
         mockServer.expect(requestTo("http://localhost:8080/ingest"))
