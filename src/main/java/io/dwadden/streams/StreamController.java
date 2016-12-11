@@ -1,5 +1,6 @@
 package io.dwadden.streams;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class StreamController {
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping(value = "/ingest", method = RequestMethod.POST)
-    public void ingest(@RequestBody IngestedPayload ingestedPayload) {
+    public void ingest(@RequestBody IngestedPayload ingestedPayload) throws JsonProcessingException {
 
         streamService.ingestPayload(ingestedPayload);
     }
