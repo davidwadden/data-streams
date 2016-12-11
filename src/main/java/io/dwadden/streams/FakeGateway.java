@@ -31,7 +31,7 @@ public class FakeGateway {
         this.restOperations = restOperations;
     }
 
-    @Scheduled(fixedDelayString = "${fakeGateway.fixedDelay}")
+    @Scheduled(initialDelay = 1_000, fixedDelayString = "${fakeGateway.fixedDelay}")
     public void uploadPayload() {
         IngestedPayload ingestedPayload = IngestedPayload.builder()
             .type("some-type")
