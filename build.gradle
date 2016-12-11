@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.4.2.RELEASE'
+		springBootVersion = '1.5.0.BUILD-SNAPSHOT'
 		junitPluginVersion = '1.0.0-M3'
 	}
 	repositories {
@@ -23,6 +23,7 @@ ext {
     junitVersion = '5.0.0-M3'
     assertJVersion = '3.6.1'
     springCloudVersion = 'Camden.SR3'
+    mockitoVersion = '2.+'
 }
 ext['spring.version'] = '5.0.0.M3'
 
@@ -51,6 +52,7 @@ dependencies {
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     // see: https://github.com/junit-team/junit5/issues/586#issuecomment-265012600
     testCompile("org.junit.platform:junit-platform-launcher:${junitPluginVersion}")
+    testCompile("org.mockito:mockito-core:${mockitoVersion}")
     testCompile("org.assertj:assertj-core:${assertJVersion}")
     testCompileOnly('org.projectlombok:lombok')
 }
@@ -62,5 +64,3 @@ dependencyManagement {
 }
 
 configurations.all { exclude group: 'junit', module: 'junit' }
-
-//junitPlatform.platformVersion = '1.0.0-M2'

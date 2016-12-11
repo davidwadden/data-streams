@@ -11,10 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 @SuppressWarnings("unused")
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @RestController
-public class Controller {
+public class StreamController {
+
+    StreamService streamService;
+
+    public StreamController(StreamService streamService) {
+        this.streamService = streamService;
+    }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping("/ingest")
-    public void ingest(@RequestBody IngestedPayload ingestedPayload) {}
+    public void ingest(@RequestBody IngestedPayload ingestedPayload) {
+
+        streamService.ingestPayload(ingestedPayload);
+    }
 
 }
