@@ -1,6 +1,7 @@
 package io.dwadden.streams;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class StreamService {
 
+    static ObjectMapper objectMapper = new ObjectMapper();
+
     StreamSource streamSource;
 
     @Autowired
@@ -17,8 +20,14 @@ public class StreamService {
         this.streamSource = streamSource;
     }
 
-    public void ingestPayload(IngestedPayload ingestedPayload) throws JsonProcessingException {
-        streamSource.ingest(ingestedPayload);
+    public void ingestPayload(IngestedPayload ingestedPayload) {
+        try {
+            String payload = objectMapper.writeValueAsString(ingestedPayload);
+
+            streamSource.ingest(payload);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

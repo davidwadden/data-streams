@@ -1,16 +1,22 @@
 package io.dwadden.streams;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
+@FieldDefaults(level = AccessLevel.PRIVATE)
 class StreamServiceTest {
 
+    static ObjectMapper objectMapper = new ObjectMapper();
     @Mock StreamSource streamSource;
     StreamService streamService;
 
@@ -30,7 +36,21 @@ class StreamServiceTest {
 
         streamService.ingestPayload(ingestedPayload);
 
-        verify(streamSource).ingest(ingestedPayload);
+        String expected = objectMapper.writeValueAsString(ingestedPayload);
+        verify(streamSource).ingest(expected);
     }
+
+    @DisplayName("when the ingested payload fails to serialize")
+    @Nested
+    class SerializationFailsTests {
+
+        @DisplayName("should throw when serialization of the ingested payload fails")
+        @Test
+        void ingestPayload_serializationFails() {
+            // noop
+        }
+
+    }
+
 
 }

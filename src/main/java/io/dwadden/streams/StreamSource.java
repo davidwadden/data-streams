@@ -16,8 +16,6 @@ import org.springframework.messaging.MessageChannel;
 @EnableBinding(Source.class)
 public class StreamSource {
 
-    static ObjectMapper objectMapper = new ObjectMapper();
-
     MessageChannel output;
 
     @Autowired
@@ -25,8 +23,7 @@ public class StreamSource {
         this.output = output;
     }
 
-    void ingest(IngestedPayload ingestedPayload) throws JsonProcessingException {
-        String payload = objectMapper.writeValueAsString(ingestedPayload);
+    void ingest(String payload) {
         Message<String> message = MessageBuilder
             .withPayload(payload)
             .build();

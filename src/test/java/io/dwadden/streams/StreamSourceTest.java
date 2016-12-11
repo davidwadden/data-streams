@@ -43,20 +43,19 @@ class StreamSourceTest {
             .type("some-type")
             .payload("some-payload")
             .build();
+        String payload = objectMapper.writeValueAsString(ingestedPayload);
 
-        streamSource.ingest(ingestedPayload);
+        streamSource.ingest(payload);
 
         ArgumentCaptor<Message<String>> argumentCaptor = ArgumentCaptor.forClass(Message.class);
-
         verify(messageChannel).send(argumentCaptor.capture());
         Message<String> sentMessage = argumentCaptor.getValue();
 
-        String payload = objectMapper.writeValueAsString(ingestedPayload);
         assertThat(sentMessage.getPayload()).isEqualTo(payload);
     }
 
-    @Nested
     @DisplayName("when the message channel fails in a non-fatal manner")
+    @Nested
     class FailingMessageChannelTests {
 
         @DisplayName("should put the message onto the errorChannel")
@@ -68,8 +67,9 @@ class StreamSourceTest {
                 .type("some-type")
                 .payload("some-payload")
                 .build();
+            String payload = objectMapper.writeValueAsString(ingestedPayload);
 
-            streamSource.ingest(ingestedPayload);
+            streamSource.ingest(payload);
 
             verify(messageChannel).send(any());
         }
