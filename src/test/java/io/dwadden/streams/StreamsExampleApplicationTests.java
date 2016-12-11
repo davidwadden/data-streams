@@ -36,11 +36,11 @@ class StreamsExampleApplicationTests {
 
     @DisplayName("should autowire successfully")
     @Test
-    public void contextLoads() { }
+    void contextLoads() { }
 
     @DisplayName("should ingest HTTP payload into Kafka topic")
     @Test
-    public void ingestPayload() throws JsonProcessingException {
+    void ingestPayload() throws JsonProcessingException {
         IngestedPayload ingestedPayload = IngestedPayload.builder()
             .type("some-type")
             .payload("some-payload")

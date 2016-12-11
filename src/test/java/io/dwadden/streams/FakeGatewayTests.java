@@ -26,11 +26,11 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ContextConfiguration(classes = {
     FakeGateway.class,
-    FakeGatewayTest.ContextConfiguration.class,
+    FakeGatewayTests.ContextConfiguration.class,
 })
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-class FakeGatewayTest {
+class FakeGatewayTests {
 
     @SuppressWarnings("unused")
     @SpyBean

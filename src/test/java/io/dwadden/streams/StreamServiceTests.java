@@ -14,7 +14,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class StreamServiceTest {
+class StreamServiceTests {
 
     static ObjectMapper objectMapper = new ObjectMapper();
     @Mock StreamSource streamSource;

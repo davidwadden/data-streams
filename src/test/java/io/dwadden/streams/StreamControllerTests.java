@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class StreamControllerTest {
+class StreamControllerTests {
 
     static final ObjectMapper objectMapper = new ObjectMapper();
 

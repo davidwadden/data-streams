@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class StreamSourceTest {
+class StreamSourceTests {
 
     static final ObjectMapper objectMapper = new ObjectMapper();
 
