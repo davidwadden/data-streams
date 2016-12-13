@@ -50,6 +50,7 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testCompile('org.springframework.integration:spring-integration-test')
+    testCompile('org.springframework.cloud:spring-cloud-stream-test-support')
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     // see: https://github.com/junit-team/junit5/issues/586#issuecomment-265012600
     testCompile("org.junit.platform:junit-platform-launcher:${junitPluginVersion}")
