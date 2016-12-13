@@ -14,13 +14,16 @@ import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.springframework.integration.test.matcher.PayloadMatcher.hasPayload;
+import static org.hamcrest.core.Is.is;
+import static org.springframework.cloud.stream.test.matcher.MessageQueueMatcher.receivesPayloadThat;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class StreamServiceIntegrationTests {
+class StreamServiceIntegrationTests {
 
     static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -36,7 +39,7 @@ public class StreamServiceIntegrationTests {
     }
 
     @SuppressWarnings("unchecked")
-    @SneakyThrows({JsonProcessingException.class, InterruptedException.class})
+    @SneakyThrows(JsonProcessingException.class)
     @DisplayName("should integration test the source")
     @Test
     void ingest() {
@@ -48,6 +51,7 @@ public class StreamServiceIntegrationTests {
         streamService.ingestPayload(ingestedPayload);
 
         String payload = objectMapper.writeValueAsString(ingestedPayload);
-        assertThat(collector.forChannel(source.output()).take(), hasPayload(payload)); // ew hamcrest
+        assertThat(collector.forChannel(source.output()),
+            receivesPayloadThat(is(payload)).within(1, TimeUnit.SECONDS));
     }
 }
