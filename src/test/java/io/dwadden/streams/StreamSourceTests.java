@@ -3,6 +3,7 @@ package io.dwadden.streams;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +13,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
+
+import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -34,9 +37,10 @@ class StreamSourceTests {
     }
 
     @SuppressWarnings("unchecked")
+    @SneakyThrows(JsonProcessingException.class)
     @DisplayName("should send the message with a payload of ingested payload")
     @Test
-    void ingest() throws JsonProcessingException {
+    void ingest() {
         when(messageChannel.send(any())).thenReturn(true);
 
         IngestedPayload ingestedPayload = IngestedPayload.builder()
@@ -58,9 +62,10 @@ class StreamSourceTests {
     @Nested
     class FailingMessageChannelTests {
 
+        @SneakyThrows(JsonProcessingException.class)
         @DisplayName("should put the message onto the errorChannel")
         @Test
-        void ingest_channelFails() throws JsonProcessingException {
+        void ingest_channelFails() {
             when(messageChannel.send(any())).thenReturn(false);
 
             IngestedPayload ingestedPayload = IngestedPayload.builder()

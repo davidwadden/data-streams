@@ -3,6 +3,7 @@ package io.dwadden.streams;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,9 +27,10 @@ class StreamServiceTests {
         streamService = new StreamService(streamSource);
     }
 
+    @SneakyThrows(JsonProcessingException.class)
     @DisplayName("should send the ingested payload to the stream source")
     @Test
-    void ingestPayload() throws JsonProcessingException {
+    void ingestPayload() {
         IngestedPayload ingestedPayload = IngestedPayload.builder()
             .type("some-type")
             .payload("some-payload")

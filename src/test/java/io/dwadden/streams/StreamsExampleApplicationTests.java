@@ -3,6 +3,7 @@ package io.dwadden.streams;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,9 +39,10 @@ class StreamsExampleApplicationTests {
     @Test
     void contextLoads() { }
 
+    @SneakyThrows(JsonProcessingException.class)
     @DisplayName("should ingest HTTP payload into Kafka topic")
     @Test
-    void ingestPayload() throws JsonProcessingException {
+    void ingestPayload() {
         IngestedPayload ingestedPayload = IngestedPayload.builder()
             .type("some-type")
             .payload("some-payload")
