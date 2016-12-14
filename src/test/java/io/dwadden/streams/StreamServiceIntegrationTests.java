@@ -22,7 +22,7 @@ import static org.springframework.cloud.stream.test.matcher.MessageQueueMatcher.
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 class StreamServiceIntegrationTests {
 
     static final ObjectMapper objectMapper = new ObjectMapper();
