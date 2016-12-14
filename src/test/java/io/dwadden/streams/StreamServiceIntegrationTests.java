@@ -1,9 +1,7 @@
 package io.dwadden.streams;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
-import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,15 +15,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.cloud.stream.test.matcher.MessageQueueMatcher.receivesPayloadThat;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 class StreamServiceIntegrationTests {
-
-    static final ObjectMapper objectMapper = new ObjectMapper();
 
     final StreamService streamService;
     final Source source;
@@ -39,7 +35,6 @@ class StreamServiceIntegrationTests {
     }
 
     @SuppressWarnings("unchecked")
-    @SneakyThrows(JsonProcessingException.class)
     @DisplayName("should integration test the source")
     @Test
     void ingest() {
@@ -50,8 +45,7 @@ class StreamServiceIntegrationTests {
 
         streamService.ingestPayload(ingestedPayload);
 
-        String payload = objectMapper.writeValueAsString(ingestedPayload);
         assertThat(collector.forChannel(source.output()),
-            receivesPayloadThat(is(payload)).within(1, TimeUnit.SECONDS));
+            receivesPayloadThat(equalTo(ingestedPayload)).within(1, TimeUnit.SECONDS));
     }
 }

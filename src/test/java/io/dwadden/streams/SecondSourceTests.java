@@ -3,6 +3,7 @@ package io.dwadden.streams;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,6 +19,7 @@ class SecondSourceTests {
         secondSource = new SecondSource();
     }
 
+    @DisplayName("should put message on topic with fixed payload")
     @Test
     void payloadSource() {
         IngestedPayload ingestedPayload = secondSource.payloadSource();
@@ -26,6 +28,7 @@ class SecondSourceTests {
             .type("some-type")
             .payload("some-payload")
             .build();
+
         assertThat(ingestedPayload).isEqualTo(expected);
     }
 
