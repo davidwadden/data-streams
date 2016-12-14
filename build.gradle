@@ -22,10 +22,12 @@ apply plugin: 'org.junit.platform.gradle.plugin'
 ext {
     junitVersion = '5.0.0-M3'
     assertJVersion = '3.6.1'
-    springCloudVersion = 'Brixton.SR7'
+    springCloudVersion = 'Camden.SR2'
     mockitoVersion = '2.+'
+    kafkaVersion = '0.10.1.0'
 }
 ext['spring.version'] = '5.0.0.M3'
+ext['spring-cloud-stream.version'] = 'Brooklyn.SR1'
 
 jar {
     baseName = 'streams'
@@ -45,6 +47,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.cloud:spring-cloud-starter-stream-kafka')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile("org.apache.kafka:kafka-clients:${kafkaVersion}")
+    compile("org.apache.kafka:kafka_2.11:${kafkaVersion}")
     compileOnly('org.projectlombok:lombok')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
@@ -65,4 +69,8 @@ dependencyManagement {
     }
 }
 
-configurations.all { exclude group: 'junit', module: 'junit' }
+configurations.all {
+    exclude group: 'junit', module: 'junit'
+    exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    exclude group: 'log4j', module: 'log4j'
+}
