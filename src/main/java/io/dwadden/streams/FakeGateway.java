@@ -17,17 +17,17 @@ import java.net.URI;
 @SuppressWarnings("unused")
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Slf4j
-@EnableConfigurationProperties
+@EnableConfigurationProperties(FakeGatewayProperties.class)
 @Component
 public class FakeGateway {
 
-    FakeGatewayConfiguration fakeGatewayConfiguration;
+    FakeGatewayProperties fakeGatewayProperties;
     RestOperations restOperations;
 
     @Autowired
-    public FakeGateway(FakeGatewayConfiguration fakeGatewayConfiguration,
+    public FakeGateway(FakeGatewayProperties fakeGatewayProperties,
                        RestOperations restOperations) {
-        this.fakeGatewayConfiguration = fakeGatewayConfiguration;
+        this.fakeGatewayProperties = fakeGatewayProperties;
         this.restOperations = restOperations;
     }
 
@@ -39,7 +39,7 @@ public class FakeGateway {
             .build();
 
         RequestEntity<IngestedPayload> requestEntity = RequestEntity
-            .post(URI.create(fakeGatewayConfiguration.getEndpoint()))
+            .post(URI.create(fakeGatewayProperties.getEndpoint()))
             .contentType(MediaType.APPLICATION_JSON)
             .body(ingestedPayload);
 

@@ -11,8 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Data
 @EnableScheduling
 @ConfigurationProperties(prefix = "fakeGateway")
-@Configuration
-public class FakeGatewayConfiguration {
+public class FakeGatewayProperties {
 
     String fixedDelay;
     String endpoint;

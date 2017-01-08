@@ -34,7 +34,7 @@ class FakeGatewayTests {
 
     @SuppressWarnings("unused")
     @SpyBean
-    FakeGatewayConfiguration fakeGatewayConfiguration;
+    FakeGatewayProperties fakeGatewayProperties;
 
     MockRestServiceServer mockServer;
     FakeGateway fakeGateway;
@@ -44,13 +44,13 @@ class FakeGatewayTests {
     void setUp() {
         RestTemplate restTemplate = new RestTemplate();
         mockServer = MockRestServiceServer.createServer(restTemplate);
-        fakeGateway = new FakeGateway(fakeGatewayConfiguration, restTemplate);
+        fakeGateway = new FakeGateway(fakeGatewayProperties, restTemplate);
     }
 
     @DisplayName("should upload the payload to the endpoint")
     @Test
     void uploadPayload() {
-        fakeGatewayConfiguration.setEndpoint("http://some-host/some-endpoint");
+        fakeGatewayProperties.setEndpoint("http://some-host/some-endpoint");
 
         mockServer.expect(requestTo("http://some-host/some-endpoint"))
             .andExpect(method(HttpMethod.POST))
@@ -60,7 +60,7 @@ class FakeGatewayTests {
 
         mockServer.verify();
 
-        verify(fakeGatewayConfiguration).getEndpoint();
+        verify(fakeGatewayProperties).getEndpoint();
     }
 
     @SuppressWarnings("unused")
