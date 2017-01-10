@@ -1,6 +1,7 @@
-package io.dwadden.data.source;
+package io.dwadden.widget.source;
 
 import lombok.AccessLevel;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.DisplayName;
@@ -10,41 +11,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.cloud.stream.test.binder.MessageCollector;
+import org.springframework.messaging.Message;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.cloud.stream.test.matcher.MessageQueueMatcher.receivesPayloadThat;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-class StreamServiceIntegrationTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
+class WidgetSourceIntegrationTest {
 
-    final StreamService streamService;
     final Source source;
     final MessageCollector collector;
 
     @Autowired
-    StreamServiceIntegrationTest(StreamService streamService, Source source, MessageCollector collector) {
-        this.streamService = streamService;
+    WidgetSourceIntegrationTest(Source source, MessageCollector collector) {
         this.source = source;
         this.collector = collector;
     }
 
     @SuppressWarnings("unchecked")
+    @SneakyThrows(InterruptedException.class)
     @DisplayName("should integration test the source")
     @Test
     void ingest() {
-        IngestedPayload ingestedPayload = IngestedPayload.builder()
-            .type("some-type")
-            .payload("some-payload")
-            .build();
+        Message<?> msg = collector.forChannel(source.output()).poll(1, TimeUnit.SECONDS);
 
-        streamService.ingestPayload(ingestedPayload);
-
-        MatcherAssert.assertThat(collector.forChannel(source.output()),
-            receivesPayloadThat(equalTo(ingestedPayload)).within(1, TimeUnit.SECONDS));
+        assertThat(msg).isNotNull();
+        assertThat(msg.getPayload()).isExactlyInstanceOf(Widget.class);
     }
 }

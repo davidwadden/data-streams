@@ -1,14 +1,14 @@
-package io.dwadden.data.source;
+package io.dwadden.widget.source;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.Builder;
 import lombok.Value;
 
-@JsonDeserialize(builder = IngestedPayload.IngestedPayloadBuilder.class)
+@JsonDeserialize(builder = Widget.IngestedPayloadBuilder.class)
 @Builder
 @Value
-public class IngestedPayload {
+public class Widget {
 
     String type;
     String payload;

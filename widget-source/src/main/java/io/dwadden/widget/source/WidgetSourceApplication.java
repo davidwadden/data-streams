@@ -1,12 +1,12 @@
-package io.dwadden.data.source;
+package io.dwadden.widget.source;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DataSourceApplication {
+public class WidgetSourceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DataSourceApplication.class, args);
+		SpringApplication.run(WidgetSourceApplication.class, args);
 	}
 }

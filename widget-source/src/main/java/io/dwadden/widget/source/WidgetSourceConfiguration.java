@@ -1,4 +1,4 @@
-package io.dwadden.data.source;
+package io.dwadden.widget.source;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -16,7 +16,7 @@ import javax.servlet.Filter;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 @Configuration
-public class DataSourceConfiguration {
+public class WidgetSourceConfiguration {
 
     @Bean
     public RestOperations restOperations() {

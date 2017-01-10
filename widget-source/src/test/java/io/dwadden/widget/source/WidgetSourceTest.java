@@ -1,4 +1,4 @@
-package io.dwadden.data.source;
+package io.dwadden.widget.source;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -9,26 +9,26 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class DataSourceTest {
+class WidgetSourceTest {
 
-    DataSource dataSource;
+    WidgetSource widgetSource;
 
     @BeforeEach
     void setUp() {
-        dataSource = new DataSource();
+        widgetSource = new WidgetSource();
     }
 
     @DisplayName("should put message on topic with fixed payload")
     @Test
     void payloadSource() {
-        IngestedPayload ingestedPayload = dataSource.payloadSource();
+        Widget widget = widgetSource.payloadSource();
 
-        IngestedPayload expected = IngestedPayload.builder()
+        Widget expected = Widget.builder()
             .type("some-type")
             .payload("some-payload")
             .build();
 
-        assertThat(ingestedPayload).isEqualTo(expected);
+        assertThat(widget).isEqualTo(expected);
     }
 
 }
