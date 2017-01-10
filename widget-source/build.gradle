@@ -1,6 +1,5 @@
-
 jar {
-    baseName = 'data-source'
+    baseName = 'widget-source'
 }
 
 ext {
