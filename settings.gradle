@@ -1,4 +1,5 @@
 rootProject.name = "widget-streams"
 
 include 'avro-entities'
+include 'batch-sink'
 include 'widget-source'

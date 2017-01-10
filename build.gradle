@@ -31,6 +31,7 @@ subprojects {
         kafkaVersion = '0.10.1.1'
         avroVersion = '1.8.1'
         jsonAssertVersion = '1.4.0'
+        dozerVersion = '5.5.1'
     }
     ext['spring.version'] = '5.0.0.M3'
     ext['spring-cloud-stream.version'] = 'Brooklyn.SR1'
@@ -65,6 +66,7 @@ subprojects {
             dependency "org.apache.kafka:kafka-clients:${kafkaVersion}"
             dependency "org.apache.kafka:kafka_2.11:${kafkaVersion}"
             dependency "org.apache.avro:avro:${avroVersion}"
+            dependency "net.sf.dozer:dozer:${dozerVersion}"
 
             dependency "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
             dependency "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
@@ -85,23 +87,6 @@ subprojects {
 
 configure(subprojects - project(':avro-entities')) {
 
-    dependencies {
-        compile('org.springframework.boot:spring-boot-starter-actuator')
-        compile('org.springframework.cloud:spring-cloud-starter-stream-kafka')
-        compile('org.springframework.boot:spring-boot-starter-web')
-        compile("org.springframework.integration:spring-integration-kafka")
-        compile("org.apache.kafka:kafka-clients")
-        compile("org.apache.kafka:kafka_2.11")
 
-        testCompile('org.springframework.boot:spring-boot-starter-test')
-        testCompile('org.springframework.integration:spring-integration-test')
-        testCompile('org.springframework.cloud:spring-cloud-stream-test-support')
-    }
-
-    dependencyManagement {
-        imports {
-            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-        }
-    }
 
 }
