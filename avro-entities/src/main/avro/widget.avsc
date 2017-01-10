@@ -1,0 +1,9 @@
+{"namespace": "io.dwadden.widget.avro",
+ "type": "record",
+ "name": "AvroWidget",
+ "fields": [
+     {"name": "name", "type": "string"},
+     {"name": "favorite_number",  "type": ["int", "null"]},
+     {"name": "favorite_color", "type": ["string", "null"]}
+ ]
+}

@@ -1,3 +1,4 @@
 rootProject.name = "data-streams"
 
+include 'avro-entities'
 include 'widget-source'

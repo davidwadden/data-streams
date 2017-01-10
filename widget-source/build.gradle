@@ -2,3 +2,7 @@
 jar {
     baseName = 'data-source'
 }
+
+dependencies {
+    compile project(':avro-entities')
+}
