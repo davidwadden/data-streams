@@ -1,5 +1,6 @@
 package io.dwadden.widget.source;
 
+import io.dwadden.widget.avro.AvroWidget;
 import lombok.AccessLevel;
 import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
@@ -31,7 +32,6 @@ class WidgetSourceIntegrationTest {
         this.collector = collector;
     }
 
-    @SuppressWarnings("unchecked")
     @SneakyThrows(InterruptedException.class)
     @DisplayName("should integration test the source")
     @Test
@@ -39,9 +39,9 @@ class WidgetSourceIntegrationTest {
         Message<?> msg = collector.forChannel(source.output()).poll(1, TimeUnit.SECONDS);
 
         assertThat(msg).isNotNull();
-        assertThat(msg.getPayload()).isExactlyInstanceOf(Widget.class);
+        assertThat(msg.getPayload()).isExactlyInstanceOf(AvroWidget.class);
 
-        Widget widget = (Widget) msg.getPayload();
+        AvroWidget widget = (AvroWidget) msg.getPayload();
         assertThat(widget.getKey()).isEqualTo(0);
     }
 }

@@ -3,7 +3,12 @@ jar {
     baseName = 'data-source'
 }
 
+ext {
+    dozerVersion = '5.4.0'
+}
+
 dependencies {
     compile project(':avro-entities')
     compile("org.springframework.integration:spring-integration-java-dsl")
+    compile "net.sf.dozer:dozer:${dozerVersion}"
 }

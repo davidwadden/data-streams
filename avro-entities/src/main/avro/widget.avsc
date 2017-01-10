@@ -2,8 +2,8 @@
  "type": "record",
  "name": "AvroWidget",
  "fields": [
-     {"name": "name", "type": "string"},
-     {"name": "favorite_number",  "type": ["int", "null"]},
-     {"name": "favorite_color", "type": ["string", "null"]}
+     {"name": "key", "type": "long"},
+     {"name": "type", "type": "string"},
+     {"name": "payload", "type": ["string", "null"]}
  ]
 }
