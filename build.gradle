@@ -28,7 +28,7 @@ subprojects {
         springIntegrationKafkaVersion = '2.1.0.RELEASE'
         springIntegrationJavaDsl = '1.2.1.RELEASE'
         mockitoVersion = '2.+'
-        kafkaVersion = '0.10.1.0'
+        kafkaVersion = '0.10.1.1'
         avroVersion = '1.8.1'
         jsonAssertVersion = '1.4.0'
     }
