@@ -24,7 +24,7 @@ subprojects {
     ext {
         junitVersion = '5.0.0-M3'
         assertJVersion = '3.6.1'
-        springCloudVersion = 'Camden.SR2'
+        springCloudVersion = 'Camden.SR3'
         springIntegrationKafkaVersion = '2.1.0.RELEASE'
         springIntegrationJavaDsl = '1.2.1.RELEASE'
         mockitoVersion = '2.+'
