@@ -104,7 +104,4 @@ configure(subprojects - project(':avro-entities')) {
         }
     }
 
-
 }
-
-

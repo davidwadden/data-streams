@@ -12,3 +12,7 @@ dependencies {
     compile("org.springframework.integration:spring-integration-java-dsl")
     compile "net.sf.dozer:dozer:${dozerVersion}"
 }
+
+task bootRunAll {
+    dependsOn ':widget-source:bootRun'
+}
