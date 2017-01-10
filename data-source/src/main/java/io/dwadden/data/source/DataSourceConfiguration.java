@@ -1,4 +1,4 @@
-package io.dwadden.streams;
+package io.dwadden.data.source;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -16,7 +16,7 @@ import javax.servlet.Filter;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 @Configuration
-public class StreamsExampleConfiguration {
+public class DataSourceConfiguration {
 
     @Bean
     public RestOperations restOperations() {

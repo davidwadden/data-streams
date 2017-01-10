@@ -1,4 +1,4 @@
-package io.dwadden.streams;
+package io.dwadden.data.source;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;

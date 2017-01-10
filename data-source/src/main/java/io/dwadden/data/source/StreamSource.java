@@ -1,5 +1,4 @@
-package io.dwadden.streams;
-
+package io.dwadden.data.source;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;

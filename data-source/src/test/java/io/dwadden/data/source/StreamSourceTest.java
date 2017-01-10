@@ -1,4 +1,4 @@
-package io.dwadden.streams;
+package io.dwadden.data.source;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,21 +9,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 
-import java.util.function.Function;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class StreamSourceTests {
+class StreamSourceTest {
 
     static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -41,7 +37,7 @@ class StreamSourceTests {
     @DisplayName("should send the message with a payload of ingested payload")
     @Test
     void ingest() {
-        when(messageChannel.send(any())).thenReturn(true);
+        when(messageChannel.send(ArgumentMatchers.any())).thenReturn(true);
 
         IngestedPayload ingestedPayload = IngestedPayload.builder()
             .type("some-type")
@@ -66,7 +62,7 @@ class StreamSourceTests {
         @DisplayName("should put the message onto the errorChannel")
         @Test
         void ingest_channelFails() {
-            when(messageChannel.send(any())).thenReturn(false);
+            when(messageChannel.send(ArgumentMatchers.any())).thenReturn(false);
 
             IngestedPayload ingestedPayload = IngestedPayload.builder()
                 .type("some-type")
@@ -76,7 +72,7 @@ class StreamSourceTests {
 
             streamSource.ingest(payload);
 
-            verify(messageChannel).send(any());
+            verify(messageChannel).send(ArgumentMatchers.any());
         }
     }
 }

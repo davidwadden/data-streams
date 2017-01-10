@@ -1,4 +1,4 @@
-package io.dwadden.streams;
+package io.dwadden.data.source;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -7,22 +7,21 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class SecondSourceTests {
+class DataSourceTest {
 
-    SecondSource secondSource;
+    DataSource dataSource;
 
     @BeforeEach
     void setUp() {
-        secondSource = new SecondSource();
+        dataSource = new DataSource();
     }
 
     @DisplayName("should put message on topic with fixed payload")
     @Test
     void payloadSource() {
-        IngestedPayload ingestedPayload = secondSource.payloadSource();
+        IngestedPayload ingestedPayload = dataSource.payloadSource();
 
         IngestedPayload expected = IngestedPayload.builder()
             .type("some-type")

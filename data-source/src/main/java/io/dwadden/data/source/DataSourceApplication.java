@@ -1,12 +1,12 @@
-package io.dwadden.streams;
+package io.dwadden.data.source;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StreamsExampleApplication {
+public class DataSourceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StreamsExampleApplication.class, args);
+		SpringApplication.run(DataSourceApplication.class, args);
 	}
 }

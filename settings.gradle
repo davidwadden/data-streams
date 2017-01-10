@@ -1,1 +1,3 @@
-rootProject.name = "streams-example"
+rootProject.name = "data-streams"
+
+include 'data-source'

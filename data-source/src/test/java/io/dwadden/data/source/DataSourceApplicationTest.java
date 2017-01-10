@@ -1,4 +1,4 @@
-package io.dwadden.streams;
+package io.dwadden.data.source;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,14 +24,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class StreamsExampleApplicationTests {
+class DataSourceApplicationTest {
 
     static ObjectMapper objectMapper = new ObjectMapper();
 
     final TestRestTemplate testRestTemplate;
 
     @Autowired
-    StreamsExampleApplicationTests(TestRestTemplate testRestTemplate) {
+    DataSourceApplicationTest(TestRestTemplate testRestTemplate) {
         this.testRestTemplate = testRestTemplate;
     }
 

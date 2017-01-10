@@ -1,4 +1,4 @@
-package io.dwadden.streams;
+package io.dwadden.data.source;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +15,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class StreamServiceTests {
+class StreamServiceTest {
 
     static ObjectMapper objectMapper = new ObjectMapper();
     @Mock StreamSource streamSource;

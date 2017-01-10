@@ -14,86 +14,81 @@ buildscript {
     }
 }
 
-plugins {
-    id 'com.commercehub.gradle.plugin.avro' version '0.9.0'
-}
+subprojects {
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'org.junit.platform.gradle.plugin'
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'org.junit.platform.gradle.plugin'
 
-ext {
-    junitVersion = '5.0.0-M3'
-    assertJVersion = '3.6.1'
-    springCloudVersion = 'Camden.SR2'
-    springIntegrationKafkaVersion = '2.1.0.RELEASE'
-    mockitoVersion = '2.+'
-    kafkaVersion = '0.10.1.0'
-    avroVersion = '1.8.1'
-}
-ext['spring.version'] = '5.0.0.M3'
-ext['spring-cloud-stream.version'] = 'Brooklyn.SR1'
-ext['kafka.version'] = '0.10.1.0'
-ext['spring-integration-kafka.version'] = '2.1.0.RELEASE'
+    ext {
+        junitVersion = '5.0.0-M3'
+        assertJVersion = '3.6.1'
+        springCloudVersion = 'Camden.SR2'
+        springIntegrationKafkaVersion = '2.1.0.RELEASE'
+        mockitoVersion = '2.+'
+        kafkaVersion = '0.10.1.0'
+        avroVersion = '1.8.1'
+    }
+    ext['spring.version'] = '5.0.0.M3'
+    ext['spring-cloud-stream.version'] = 'Brooklyn.SR1'
+    ext['kafka.version'] = '0.10.1.0'
+    ext['spring-integration-kafka.version'] = '2.1.0.RELEASE'
 
-jar {
-    baseName = 'streams'
-}
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-    maven { url "https://repo.spring.io/snapshot" }
-    maven { url "https://repo.spring.io/milestone" }
-}
-
-
-dependencies {
-    compile('org.springframework.boot:spring-boot-starter-actuator')
-    compile('org.springframework.cloud:spring-cloud-starter-stream-kafka')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile("org.springframework.integration:spring-integration-kafka")
-    compile("org.apache.kafka:kafka-clients")
-    compile("org.apache.kafka:kafka_2.11")
-    compile("org.apache.avro:avro")
-    compileOnly('org.projectlombok:lombok')
-
-    testCompile('org.springframework.boot:spring-boot-starter-test')
-    testCompile("org.junit.jupiter:junit-jupiter-api")
-    testCompile('org.springframework.integration:spring-integration-test')
-    testCompile('org.springframework.cloud:spring-cloud-stream-test-support')
-    testRuntime("org.junit.jupiter:junit-jupiter-engine")
-    // see: https://github.com/junit-team/junit5/issues/586#issuecomment-265012600
-    testCompile("org.junit.platform:junit-platform-launcher")
-    testCompile("org.mockito:mockito-core")
-    testCompile("org.assertj:assertj-core")
-    testCompileOnly('org.projectlombok:lombok')
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
     }
 
     dependencies {
-        dependency "org.springframework.integration:spring-integration-kafka:${springIntegrationKafkaVersion}"
-        dependency "org.apache.kafka:kafka-clients:${kafkaVersion}"
-        dependency "org.apache.kafka:kafka_2.11:${kafkaVersion}"
-        dependency "org.apache.avro:avro:${avroVersion}"
+        compile('org.springframework.boot:spring-boot-starter-actuator')
+        compile('org.springframework.cloud:spring-cloud-starter-stream-kafka')
+        compile('org.springframework.boot:spring-boot-starter-web')
+        compile("org.springframework.integration:spring-integration-kafka")
+        compile("org.apache.kafka:kafka-clients")
+        compile("org.apache.kafka:kafka_2.11")
+        compileOnly('org.projectlombok:lombok')
 
-        dependency "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-        dependency "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-        dependency "org.junit.platform:junit-platform-launcher:${junitPluginVersion}"
-        dependency "org.mockito:mockito-core:${mockitoVersion}"
-        dependency "org.assertj:assertj-core:${assertJVersion}"
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+        testCompile("org.junit.jupiter:junit-jupiter-api")
+        testCompile('org.springframework.integration:spring-integration-test')
+        testCompile('org.springframework.cloud:spring-cloud-stream-test-support')
+        testRuntime("org.junit.jupiter:junit-jupiter-engine")
+        // see: https://github.com/junit-team/junit5/issues/586#issuecomment-265012600
+        testCompile("org.junit.platform:junit-platform-launcher")
+        testCompile("org.mockito:mockito-core")
+        testCompile("org.assertj:assertj-core")
+        testCompileOnly('org.projectlombok:lombok')
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+
+        dependencies {
+            dependency "org.springframework.integration:spring-integration-kafka:${springIntegrationKafkaVersion}"
+            dependency "org.apache.kafka:kafka-clients:${kafkaVersion}"
+            dependency "org.apache.kafka:kafka_2.11:${kafkaVersion}"
+            dependency "org.apache.avro:avro:${avroVersion}"
+
+            dependency "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+            dependency "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+            dependency "org.junit.platform:junit-platform-launcher:${junitPluginVersion}"
+            dependency "org.mockito:mockito-core:${mockitoVersion}"
+            dependency "org.assertj:assertj-core:${assertJVersion}"
+        }
+    }
+
+    configurations.all {
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        exclude group: 'log4j', module: 'log4j'
     }
 }
 
-configurations.all {
-    exclude group: 'junit', module: 'junit'
-    exclude group: 'org.slf4j', module: 'slf4j-log4j12'
-    exclude group: 'log4j', module: 'log4j'
-}
+

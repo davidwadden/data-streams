@@ -1,4 +1,4 @@
-package io.dwadden.streams;
+package io.dwadden.data.source;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
@@ -9,15 +9,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class StreamControllerTests {
+class StreamControllerTest {
 
     static final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -44,7 +44,7 @@ class StreamControllerTests {
         mockMvc.perform(post("/ingest")
             .contentType(MediaType.APPLICATION_JSON)
             .content(postBody)
-        ).andExpect(status().isAccepted());
+        ).andExpect(MockMvcResultMatchers.status().isAccepted());
 
         verify(mockService).ingestPayload(ingestedPayload);
     }

@@ -1,8 +1,8 @@
-package io.dwadden.streams;
+package io.dwadden.data.source;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,21 +14,20 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.cloud.stream.test.matcher.MessageQueueMatcher.receivesPayloadThat;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-class StreamServiceIntegrationTests {
+class StreamServiceIntegrationTest {
 
     final StreamService streamService;
     final Source source;
     final MessageCollector collector;
 
     @Autowired
-    StreamServiceIntegrationTests(StreamService streamService, Source source, MessageCollector collector) {
+    StreamServiceIntegrationTest(StreamService streamService, Source source, MessageCollector collector) {
         this.streamService = streamService;
         this.source = source;
         this.collector = collector;
@@ -45,7 +44,7 @@ class StreamServiceIntegrationTests {
 
         streamService.ingestPayload(ingestedPayload);
 
-        assertThat(collector.forChannel(source.output()),
+        MatcherAssert.assertThat(collector.forChannel(source.output()),
             receivesPayloadThat(equalTo(ingestedPayload)).within(1, TimeUnit.SECONDS));
     }
 }

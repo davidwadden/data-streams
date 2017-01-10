@@ -1,4 +1,4 @@
-package io.dwadden.streams;
+package io.dwadden.data.source;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
@@ -14,23 +14,22 @@ import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.client.MockRestServiceServer;
+import org.springframework.test.web.client.match.MockRestRequestMatchers;
+import org.springframework.test.web.client.response.MockRestResponseCreators;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withNoContent;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ContextConfiguration(classes = {
     FakeGateway.class,
-    FakeGatewayTests.ContextConfiguration.class,
+    FakeGatewayTest.ContextConfiguration.class,
 })
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-class FakeGatewayTests {
+class FakeGatewayTest {
 
     @SuppressWarnings("unused")
     @SpyBean
@@ -52,9 +51,9 @@ class FakeGatewayTests {
     void uploadPayload() {
         fakeGatewayProperties.setEndpoint("http://some-host/some-endpoint");
 
-        mockServer.expect(requestTo("http://some-host/some-endpoint"))
-            .andExpect(method(HttpMethod.POST))
-            .andRespond(withNoContent());
+        mockServer.expect(MockRestRequestMatchers.requestTo("http://some-host/some-endpoint"))
+            .andExpect(MockRestRequestMatchers.method(HttpMethod.POST))
+            .andRespond(MockRestResponseCreators.withNoContent());
 
         fakeGateway.uploadPayload();
 
