@@ -3,7 +3,6 @@ package io.dwadden.widget.source;
 import lombok.AccessLevel;
 import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
-import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,8 +16,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.springframework.cloud.stream.test.matcher.MessageQueueMatcher.receivesPayloadThat;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(SpringExtension.class)
@@ -43,5 +40,8 @@ class WidgetSourceIntegrationTest {
 
         assertThat(msg).isNotNull();
         assertThat(msg.getPayload()).isExactlyInstanceOf(Widget.class);
+
+        Widget widget = (Widget) msg.getPayload();
+        assertThat(widget.getKey()).isEqualTo(0);
     }
 }

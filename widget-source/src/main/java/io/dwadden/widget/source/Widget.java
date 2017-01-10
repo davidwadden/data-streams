@@ -10,6 +10,7 @@ import lombok.Value;
 @Value
 public class Widget {
 
+    Long key;
     String type;
     String payload;
 

@@ -1,4 +1,4 @@
-rootProject.name = "data-streams"
+rootProject.name = "widget-streams"
 
 include 'avro-entities'
 include 'widget-source'
