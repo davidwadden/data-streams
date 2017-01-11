@@ -8,7 +8,7 @@ import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
-import org.springframework.integration.dsl.core.Pollers;
+import org.springframework.integration.dsl.Pollers;
 import org.springframework.integration.endpoint.MethodInvokingMessageSource;
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -32,10 +32,10 @@ public class WidgetSourceFlowConfiguration {
                                 AvroWidgetTransformer avroWidgetTransformer) {
 
         return IntegrationFlows
-            .from(this.longMessageSource(), c -> c.poller(Pollers.fixedRate(100)))
+            .from(this.longMessageSource(), c -> c.poller(Pollers.fixedRate(100L)))
             .transform(widgetGenerator)
             .transform(avroWidgetTransformer)
-            .channel("output")
+            .channel(Source.OUTPUT)
             .get();
     }
 
