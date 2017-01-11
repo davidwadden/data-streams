@@ -15,7 +15,7 @@ import org.springframework.integration.dsl.IntegrationFlows;
 public class BatchSinkFlowConfiguration {
 
     @Bean
-    public IntegrationFlow flow(Sink input, WidgetBatchFileHandler widgetBatchFileHandler) {
+    public IntegrationFlow flow(WidgetBatchFileHandler widgetBatchFileHandler) {
         return IntegrationFlows
             .from(Sink.INPUT)
             .handle(widgetBatchFileHandler)

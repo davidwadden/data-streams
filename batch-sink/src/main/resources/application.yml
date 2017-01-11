@@ -1,0 +1,4 @@
+## sets the batch size
+batch-sink.batch-size: 3
+
+## sets
