@@ -3,7 +3,7 @@ package io.dwadden.widget.source;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WidgetFactoryTransformer {
+public class WidgetGenerator {
 
     public Widget transform(Long key) {
 

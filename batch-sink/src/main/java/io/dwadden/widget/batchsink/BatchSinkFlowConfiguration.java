@@ -17,7 +17,7 @@ public class BatchSinkFlowConfiguration {
     @Bean
     public IntegrationFlow flow(Sink input, WidgetBatchFileHandler widgetBatchFileHandler) {
         return IntegrationFlows
-            .from("input")
+            .from(Sink.INPUT)
             .handle(widgetBatchFileHandler)
             .get();
     }

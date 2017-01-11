@@ -28,12 +28,12 @@ public class WidgetSourceFlowConfiguration {
     }
 
     @Bean
-    public IntegrationFlow flow(WidgetFactoryTransformer widgetFactoryTransformer,
+    public IntegrationFlow flow(WidgetGenerator widgetGenerator,
                                 AvroWidgetTransformer avroWidgetTransformer) {
 
         return IntegrationFlows
             .from(this.longMessageSource(), c -> c.poller(Pollers.fixedRate(100)))
-            .transform(widgetFactoryTransformer)
+            .transform(widgetGenerator)
             .transform(avroWidgetTransformer)
             .channel("output")
             .get();
