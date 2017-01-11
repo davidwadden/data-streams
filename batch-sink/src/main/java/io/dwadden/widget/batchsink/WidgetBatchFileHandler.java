@@ -23,7 +23,11 @@ public class WidgetBatchFileHandler {
     public void handleMessage(Message<AvroWidget> message) {
         logger.info(message.getPayload().toString());
 
-        restOperations.postForEntity("http://localhost:8080/upload", "some-body", null);
+        restOperations.postForEntity(
+            "http://localhost:8080/upload",
+            message.getPayload().getKey().toString(),
+            null
+        );
     }
 
 }

@@ -21,6 +21,7 @@ import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.client.support.RestGatewaySupport;
 
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
@@ -56,6 +57,7 @@ class BatchSinkIntegrationTest {
 
         mockServer
             .expect(requestTo("http://localhost:8080/upload"))
+            .andExpect(content().string("12345"))
             .andRespond(withStatus(HttpStatus.NO_CONTENT));
 
         sink.input().send(message);

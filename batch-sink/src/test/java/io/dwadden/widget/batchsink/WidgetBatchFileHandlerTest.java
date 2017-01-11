@@ -33,7 +33,7 @@ class WidgetBatchFileHandlerTest {
         server
             .expect(requestTo("http://localhost:8080/upload"))
             .andExpect(
-                content().string("some-body")
+                content().string("12345")
             )
             .andRespond(withStatus(HttpStatus.NO_CONTENT));
 
