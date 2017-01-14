@@ -5,12 +5,12 @@ import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@SuppressWarnings("unused")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
-@ConfigurationProperties
+@ConfigurationProperties(prefix = "batchSink")
 public class BatchSinkProperties {
 
     Integer batchSize;
+    String uploadEndpoint;
 
 }

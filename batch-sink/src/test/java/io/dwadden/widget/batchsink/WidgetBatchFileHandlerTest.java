@@ -18,20 +18,23 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class WidgetBatchFileHandlerTest {
 
-    WidgetBatchFileHandler handler;
+    BatchSinkProperties batchSinkProperties;
     MockRestServiceServer mockServer;
+    WidgetBatchFileHandler handler;
 
     @BeforeEach
     void setUp() {
         RestTemplate restTemplate = new RestTemplate();
-        handler = new WidgetBatchFileHandler(restTemplate);
+        batchSinkProperties = new BatchSinkProperties();
+        handler = new WidgetBatchFileHandler(restTemplate, batchSinkProperties);
         mockServer = MockRestServiceServer.createServer(restTemplate);
     }
 
     @Test
     void handleMessage() {
+        batchSinkProperties.setUploadEndpoint("http://some.api/endpoint");
         mockServer
-            .expect(requestTo("http://localhost:8080/upload"))
+            .expect(requestTo("http://some.api/endpoint"))
             .andExpect(content().string("12345"))
             .andRespond(withStatus(HttpStatus.NO_CONTENT));
 

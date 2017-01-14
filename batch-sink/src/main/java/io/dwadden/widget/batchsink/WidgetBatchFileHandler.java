@@ -15,16 +15,18 @@ import org.springframework.web.client.RestOperations;
 public class WidgetBatchFileHandler {
 
     RestOperations restOperations;
+    BatchSinkProperties batchSinkProperties;
 
-    public WidgetBatchFileHandler(RestOperations restOperations) {
+    public WidgetBatchFileHandler(RestOperations restOperations, BatchSinkProperties batchSinkProperties) {
         this.restOperations = restOperations;
+        this.batchSinkProperties = batchSinkProperties;
     }
 
     public void handleMessage(Message<AvroWidget> message) {
         logger.info(message.getPayload().toString());
 
         restOperations.postForEntity(
-            "http://localhost:8080/upload",
+            batchSinkProperties.getUploadEndpoint(),
             message.getPayload().getKey().toString(),
             null
         );

@@ -27,7 +27,13 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+    webEnvironment = SpringBootTest.WebEnvironment.NONE,
+    properties = {
+        "batchSink.batchSize=3",
+        "batchSink.uploadEndpoint=http://some.api/endpoint",
+    }
+)
 class BatchSinkIntegrationTest {
 
     final Sink sink;
@@ -56,7 +62,7 @@ class BatchSinkIntegrationTest {
         Message<AvroWidget> message = MessageBuilder.withPayload(avroWidget).build();
 
         mockServer
-            .expect(requestTo("http://localhost:8080/upload"))
+            .expect(requestTo("http://some.api/endpoint"))
             .andExpect(content().string("12345"))
             .andRespond(withStatus(HttpStatus.NO_CONTENT));
 

@@ -1,5 +1,9 @@
+## sets the bind port
+server.port: 8090
+
 ## sets the batch size
 batch-sink.batch-size: 3
+batch-sink.end-point: http://localhost:8090/upload
 
 ## enables request logging
 server.tomcat.accessLogEnabled: true
