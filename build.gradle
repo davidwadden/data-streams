@@ -88,8 +88,4 @@ subprojects {
 
 }
 
-configure(subprojects - project(':avro-entities')) {
-
-
-
-}
+task bootRunAll(dependsOn: [':widget-source:bootRun', ':batch-sink:bootRun']) {}
