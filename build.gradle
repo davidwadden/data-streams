@@ -26,7 +26,7 @@ subprojects {
         springCloudVersion = 'Camden.SR4'
         springCloudStreamVersion = '1.2.0.M1'
         springIntegrationKafkaVersion = '2.1.0.RELEASE'
-        springIntegrationCore = '5.0.0.M2'
+        springIntegrationVersion = '5.0.0.M2'
         mockitoVersion = '2.+'
         kafkaVersion = '0.10.1.1'
         avroVersion = '1.8.1'
@@ -76,7 +76,9 @@ subprojects {
             }
 
             dependency "org.springframework.integration:spring-integration-kafka:${springIntegrationKafkaVersion}"
-            dependency "org.springframework.integration:spring-integration-core:${springIntegrationCore}"
+            dependency "org.springframework.integration:spring-integration-core:${springIntegrationVersion}"
+            dependency "org.springframework.integration:spring-integration-test:${springIntegrationVersion}"
+
             dependency "org.apache.kafka:kafka-clients:${kafkaVersion}"
             dependency "org.apache.kafka:kafka_2.11:${kafkaVersion}"
             dependency "org.apache.avro:avro:${avroVersion}"
