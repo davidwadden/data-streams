@@ -103,4 +103,4 @@ subprojects {
 
 }
 
-task bootRunAll(dependsOn: [':http-source:bootRun', ':http-api-sink:bootRun']) {}
+task bootRunAll(dependsOn: [':http-source:bootRun', ':http-api-sink:bootRun', ':fakes:bootRun']) {}

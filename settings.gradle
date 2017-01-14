@@ -1,5 +1,6 @@
 rootProject.name = "gps-streams"
 
 include 'entities'
+include 'fakes'
 include 'http-api-sink'
 include 'http-source'

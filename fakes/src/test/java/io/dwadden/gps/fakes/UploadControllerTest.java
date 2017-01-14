@@ -1,4 +1,4 @@
-package io.dwadden.gps.httpapisink;
+package io.dwadden.gps.fakes;
 
 import lombok.AccessLevel;
 import lombok.SneakyThrows;

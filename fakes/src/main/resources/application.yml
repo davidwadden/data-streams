@@ -1,0 +1,2 @@
+## sets the bind port
+server.port: 8090

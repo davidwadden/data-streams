@@ -1,5 +1,5 @@
 ## sets the bind port
-server.port: 8090
+server.port: 8092
 
 ## sets the batch size
 http-api-sink.batch-size: 3
