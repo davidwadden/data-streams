@@ -1,8 +1,7 @@
-package io.dwadden.widget.batchsink;
+package io.dwadden.gps.httpapisink;
 
-import io.dwadden.widget.avro.AvroWidget;
+import io.dwadden.gps.entities.AvroWidget;
 import lombok.AccessLevel;
-import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +18,9 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.concurrent.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;

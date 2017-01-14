@@ -1,4 +1,4 @@
-package io.dwadden.widget.batchsink;
+package io.dwadden.gps.httpapisink;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

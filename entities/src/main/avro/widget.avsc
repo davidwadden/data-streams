@@ -1,4 +1,4 @@
-{"namespace": "io.dwadden.widget.avro",
+{"namespace": "io.dwadden.gps.entities",
  "type": "record",
  "name": "AvroWidget",
  "fields": [

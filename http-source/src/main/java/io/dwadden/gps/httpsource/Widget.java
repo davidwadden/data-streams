@@ -1,4 +1,4 @@
-package io.dwadden.widget.source;
+package io.dwadden.gps.httpsource;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;

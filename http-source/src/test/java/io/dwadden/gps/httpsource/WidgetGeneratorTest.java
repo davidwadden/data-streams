@@ -1,4 +1,4 @@
-package io.dwadden.widget.source;
+package io.dwadden.gps.httpsource;
 
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;

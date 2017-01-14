@@ -1,4 +1,4 @@
-package io.dwadden.widget.source;
+package io.dwadden.gps.httpsource;
 
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;

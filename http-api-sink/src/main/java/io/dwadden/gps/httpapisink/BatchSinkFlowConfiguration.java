@@ -1,6 +1,6 @@
-package io.dwadden.widget.batchsink;
+package io.dwadden.gps.httpapisink;
 
-import io.dwadden.widget.avro.AvroWidget;
+import io.dwadden.gps.entities.AvroWidget;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Sink;

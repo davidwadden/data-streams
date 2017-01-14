@@ -1,4 +1,4 @@
-package io.dwadden.widget.batchsink;
+package io.dwadden.gps.httpapisink;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,6 @@
-package io.dwadden.widget.source;
+package io.dwadden.gps.httpsource;
 
-import io.dwadden.widget.avro.AvroWidget;
+import io.dwadden.gps.entities.AvroWidget;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.dozer.DozerBeanMapper;

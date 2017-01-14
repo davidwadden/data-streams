@@ -1,4 +1,4 @@
-package io.dwadden.widget.source;
+package io.dwadden.gps.httpapisink;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-class WidgetSourceApplicationTest {
+class BatchSinkApplicationTest {
 
     @DisplayName("should autowire successfully")
     @Test

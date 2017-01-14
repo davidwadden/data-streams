@@ -1,4 +1,4 @@
-package io.dwadden.widget.batchsink;
+package io.dwadden.gps.httpapisink;
 
 import lombok.AccessLevel;
 import lombok.SneakyThrows;

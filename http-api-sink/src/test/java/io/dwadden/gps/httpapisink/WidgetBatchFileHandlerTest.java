@@ -1,6 +1,6 @@
-package io.dwadden.widget.batchsink;
+package io.dwadden.gps.httpapisink;
 
-import io.dwadden.widget.avro.AvroWidget;
+import io.dwadden.gps.entities.AvroWidget;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;

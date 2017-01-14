@@ -1,6 +1,6 @@
-package io.dwadden.widget.batchsink;
+package io.dwadden.gps.httpapisink;
 
-import io.dwadden.widget.avro.AvroWidget;
+import io.dwadden.gps.entities.AvroWidget;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +18,7 @@ public class WidgetBatchFileHandler {
 
     RestOperations restOperations;
     BatchSinkProperties batchSinkProperties;
+    @SuppressWarnings("unused")
     Publisher<Message<AvroWidget>> publisher;
 
     @Autowired
