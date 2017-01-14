@@ -24,6 +24,7 @@ subprojects {
         junitVersion = '5.0.0-M3'
         assertJVersion = '3.6.1'
         springCloudVersion = 'Camden.SR4'
+        springCloudStreamVersion = '1.2.0.M1'
         springIntegrationKafkaVersion = '2.1.0.RELEASE'
         springIntegrationCore = '5.0.0.M2'
         mockitoVersion = '2.+'
@@ -65,6 +66,15 @@ subprojects {
         }
 
         dependencies {
+            dependencySet(group: 'org.springframework.cloud', version: "${springCloudStreamVersion}".toString()) {
+                entry 'spring-cloud-starter-stream-kafka'
+                entry 'spring-cloud-stream-binder-kafka'
+                entry 'spring-cloud-stream'
+                entry 'spring-cloud-stream-reactive'
+                entry 'spring-cloud-stream-codec'
+                entry 'spring-cloud-stream-test-support'
+            }
+
             dependency "org.springframework.integration:spring-integration-kafka:${springIntegrationKafkaVersion}"
             dependency "org.springframework.integration:spring-integration-core:${springIntegrationCore}"
             dependency "org.apache.kafka:kafka-clients:${kafkaVersion}"
