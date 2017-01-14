@@ -4,6 +4,7 @@ import io.dwadden.widget.avro.AvroWidget;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,6 +20,7 @@ class AvroWidgetTransformerTest {
         transformer = new AvroWidgetTransformer();
     }
 
+    @DisplayName("should transform a Widget into an AvroWidget")
     @Test
     void transform() {
         Widget widget = Widget.builder()

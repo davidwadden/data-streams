@@ -23,12 +23,4 @@ public class WidgetSourceConfiguration {
         return new RestTemplate();
     }
 
-    @Bean
-    public FilterRegistrationBean requestDumperFilter() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        Filter requestDumperFilter = new RequestDumperFilter();
-        registration.setFilter(requestDumperFilter);
-        registration.addUrlPatterns("/*");
-        return registration;
-    }
 }

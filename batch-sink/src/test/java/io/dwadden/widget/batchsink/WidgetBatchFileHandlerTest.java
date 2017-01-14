@@ -4,6 +4,7 @@ import io.dwadden.widget.avro.AvroWidget;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.integration.support.MessageBuilder;
@@ -39,6 +40,7 @@ class WidgetBatchFileHandlerTest {
         handler = new WidgetBatchFileHandler(restTemplate, properties, testPublisher);
     }
 
+    @DisplayName("should handle widget and make HTTP API call")
     @Test
     void handleMessage() {
         mockServer

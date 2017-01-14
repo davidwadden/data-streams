@@ -3,6 +3,7 @@ package io.dwadden.widget.source;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,6 +18,7 @@ public class WidgetGeneratorTest {
         transformer = new WidgetGenerator();
     }
 
+    @DisplayName("should transform from a key to a widget")
     @Test
     void transform() {
         Widget widget = transformer.transform(47L);
