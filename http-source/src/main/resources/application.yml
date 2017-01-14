@@ -1,6 +1,5 @@
-
-## disable http listener
-spring.main.web-environment: false
+## sets the bind port
+server.port: 8091
 
 ## logging configuration
 server.tomcat:
