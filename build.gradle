@@ -1,11 +1,10 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.0.BUILD-SNAPSHOT'
+        springBootVersion = '1.5.0.RC1'
         junitPluginVersion = '1.0.0-M3'
     }
     repositories {
         mavenCentral()
-        maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
