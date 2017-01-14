@@ -2,6 +2,7 @@ package io.dwadden.widget.batchsink;
 
 import io.dwadden.widget.avro.AvroWidget;
 import lombok.AccessLevel;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,11 +16,10 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.test.web.client.match.MockRestRequestMatchers;
-import org.springframework.test.web.client.response.MockRestResponseCreators;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.client.support.RestGatewaySupport;
+
+import java.util.concurrent.*;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -54,21 +54,27 @@ class BatchSinkIntegrationTest {
     @DisplayName("should test the Batch Sink integrates properly")
     @Test
     void batchSink() {
-        AvroWidget avroWidget = AvroWidget.newBuilder()
-            .setKey(12345L)
-            .setType("some-type")
-            .setPayload("some-payload")
-            .build();
-        Message<AvroWidget> message = MessageBuilder.withPayload(avroWidget).build();
-
         mockServer
             .expect(requestTo("http://some.api/endpoint"))
             .andExpect(content().string("12345"))
             .andRespond(withStatus(HttpStatus.NO_CONTENT));
 
-        sink.input().send(message);
+        sink.input().send(makeMessage());
 
-        mockServer.verify();
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.schedule(() -> mockServer.verify(), 1, TimeUnit.SECONDS);
+    }
+
+    private static Message<AvroWidget> makeMessage() {
+        AvroWidget avroWidget = AvroWidget.newBuilder()
+            .setKey(12345L)
+            .setType("some-type")
+            .setPayload("some-payload")
+            .build();
+
+        return MessageBuilder
+            .withPayload(avroWidget)
+            .build();
     }
 
 }

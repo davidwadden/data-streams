@@ -10,6 +10,7 @@ import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.Message;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
+import reactor.test.publisher.TestPublisher;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -18,27 +19,34 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @FieldDefaults(level = AccessLevel.PRIVATE)
 class WidgetBatchFileHandlerTest {
 
-    BatchSinkProperties batchSinkProperties;
+    static final String API_ENDPOINT = "http://some.api/endpoint";
+
+    BatchSinkProperties properties;
     MockRestServiceServer mockServer;
+    TestPublisher<Message<AvroWidget>> testPublisher;
     WidgetBatchFileHandler handler;
 
     @BeforeEach
     void setUp() {
         RestTemplate restTemplate = new RestTemplate();
-        batchSinkProperties = new BatchSinkProperties();
-        handler = new WidgetBatchFileHandler(restTemplate, batchSinkProperties);
         mockServer = MockRestServiceServer.createServer(restTemplate);
+        testPublisher = TestPublisher.create();
+
+        properties = new BatchSinkProperties();
+        properties.setBatchSize(3);
+        properties.setUploadEndpoint(API_ENDPOINT);
+
+        handler = new WidgetBatchFileHandler(restTemplate, properties, testPublisher);
     }
 
     @Test
     void handleMessage() {
-        batchSinkProperties.setUploadEndpoint("http://some.api/endpoint");
         mockServer
-            .expect(requestTo("http://some.api/endpoint"))
+            .expect(requestTo(API_ENDPOINT))
             .andExpect(content().string("12345"))
             .andRespond(withStatus(HttpStatus.NO_CONTENT));
 
-        handler.handleMessage(makeAvroMessage());
+        testPublisher.next(makeAvroMessage());
 
         mockServer.verify();
     }
