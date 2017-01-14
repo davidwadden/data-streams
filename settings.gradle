@@ -1,5 +1,5 @@
-rootProject.name = "widget-streams"
+rootProject.name = "gps-streams"
 
-include 'avro-entities'
-include 'batch-sink'
-include 'widget-source'
+include 'entities'
+include 'http-api-sink'
+include 'http-source'

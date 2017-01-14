@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
-@ConfigurationProperties(prefix = "batchSink")
+@ConfigurationProperties(prefix = "httpApiSink")
 public class BatchSinkProperties {
 
     Integer batchSize;

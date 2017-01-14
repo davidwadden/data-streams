@@ -1,5 +1,9 @@
+jar {
+    baseName = 'http-api-sink'
+}
+
 dependencies {
-    compile project(':avro-entities')
+    compile project(':entities')
 
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.cloud:spring-cloud-starter-stream-kafka')

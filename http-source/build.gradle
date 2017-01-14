@@ -1,9 +1,9 @@
 jar {
-    baseName = 'widget-source'
+    baseName = 'http-source'
 }
 
 dependencies {
-    compile project(':avro-entities')
+    compile project(':entities')
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.cloud:spring-cloud-starter-stream-kafka')
     compile('org.springframework.boot:spring-boot-starter-web')

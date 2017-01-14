@@ -30,8 +30,8 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.NONE,
     properties = {
-        "batchSink.batchSize=3",
-        "batchSink.uploadEndpoint=http://some.api/endpoint",
+        "httpApiSink.batchSize=3",
+        "httpApiSink.uploadEndpoint=http://some.api/endpoint",
     }
 )
 class BatchSinkIntegrationTest {
