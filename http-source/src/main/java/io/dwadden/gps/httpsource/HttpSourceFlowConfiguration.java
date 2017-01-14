@@ -10,6 +10,8 @@ import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.Pollers;
 import org.springframework.integration.endpoint.MethodInvokingMessageSource;
+import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -17,7 +19,12 @@ import java.util.concurrent.atomic.AtomicLong;
 @EnableIntegration
 @EnableBinding(Source.class)
 @Configuration
-public class WidgetSourceFlowConfiguration {
+public class HttpSourceFlowConfiguration {
+
+    @Bean
+    public RestOperations restOperations() {
+        return new RestTemplate();
+    }
 
     @Bean
     public MessageSource<?> longMessageSource() {
@@ -29,12 +36,12 @@ public class WidgetSourceFlowConfiguration {
 
     @Bean
     public IntegrationFlow flow(WidgetGenerator widgetGenerator,
-                                AvroWidgetTransformer avroWidgetTransformer) {
+                                WidgetTransformer widgetTransformer) {
 
         return IntegrationFlows
             .from(this.longMessageSource(), c -> c.poller(Pollers.fixedRate(100L)))
             .transform(widgetGenerator)
-            .transform(avroWidgetTransformer)
+            .transform(widgetTransformer)
             .channel(Source.OUTPUT)
             .get();
     }

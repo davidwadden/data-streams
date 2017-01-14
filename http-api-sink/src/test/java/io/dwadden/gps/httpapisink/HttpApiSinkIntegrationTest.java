@@ -35,14 +35,14 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
         "httpApiSink.uploadEndpoint=http://some.api/endpoint",
     }
 )
-class BatchSinkIntegrationTest {
+class HttpApiSinkIntegrationTest {
 
     final Sink sink;
     final RestOperations restOperations;
     MockRestServiceServer mockServer;
 
     @Autowired
-    BatchSinkIntegrationTest(Sink sink, RestOperations restOperations) {
+    HttpApiSinkIntegrationTest(Sink sink, RestOperations restOperations) {
         this.sink = sink;
         this.restOperations = restOperations;
     }

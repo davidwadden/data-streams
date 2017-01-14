@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WidgetSourceApplication {
+public class HttpSourceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WidgetSourceApplication.class, args);
+		SpringApplication.run(HttpSourceApplication.class, args);
 	}
 }

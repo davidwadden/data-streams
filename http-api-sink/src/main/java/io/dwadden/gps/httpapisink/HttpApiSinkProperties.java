@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 @ConfigurationProperties(prefix = "httpApiSink")
-public class BatchSinkProperties {
+public class HttpApiSinkProperties {
 
     Integer batchSize;
     String uploadEndpoint;

@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class AvroWidgetTransformerTest {
+class WidgetTransformerTest {
 
-    AvroWidgetTransformer transformer;
+    WidgetTransformer transformer;
 
     @BeforeEach
     void setUp() {
-        transformer = new AvroWidgetTransformer();
+        transformer = new WidgetTransformer();
     }
 
     @DisplayName("should transform a Widget into an AvroWidget")

@@ -17,16 +17,16 @@ import reactor.core.publisher.Flux;
 public class WidgetBatchFileHandler {
 
     RestOperations restOperations;
-    BatchSinkProperties batchSinkProperties;
+    HttpApiSinkProperties httpApiSinkProperties;
     @SuppressWarnings("unused")
     Publisher<Message<AvroWidget>> publisher;
 
     @Autowired
     public WidgetBatchFileHandler(RestOperations restOperations,
-                                  BatchSinkProperties batchSinkProperties,
+                                  HttpApiSinkProperties httpApiSinkProperties,
                                   Publisher<Message<AvroWidget>> publisher) {
         this.restOperations = restOperations;
-        this.batchSinkProperties = batchSinkProperties;
+        this.httpApiSinkProperties = httpApiSinkProperties;
         this.publisher = publisher;
 
         // Sets up subscription to Publisher
@@ -41,7 +41,7 @@ public class WidgetBatchFileHandler {
         logger.info("making HTTP call to API");
 
         restOperations.postForEntity(
-            batchSinkProperties.getUploadEndpoint(),
+            httpApiSinkProperties.getUploadEndpoint(),
             key.toString(),
             null
         );

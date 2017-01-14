@@ -22,7 +22,7 @@ class WidgetBatchFileHandlerTest {
 
     static final String API_ENDPOINT = "http://some.api/endpoint";
 
-    BatchSinkProperties properties;
+    HttpApiSinkProperties properties;
     MockRestServiceServer mockServer;
     TestPublisher<Message<AvroWidget>> testPublisher;
     WidgetBatchFileHandler handler;
@@ -33,7 +33,7 @@ class WidgetBatchFileHandlerTest {
         mockServer = MockRestServiceServer.createServer(restTemplate);
         testPublisher = TestPublisher.create();
 
-        properties = new BatchSinkProperties();
+        properties = new HttpApiSinkProperties();
         properties.setBatchSize(3);
         properties.setUploadEndpoint(API_ENDPOINT);
 

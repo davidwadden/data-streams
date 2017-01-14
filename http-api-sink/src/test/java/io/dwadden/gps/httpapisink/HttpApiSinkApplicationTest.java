@@ -8,7 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-class BatchSinkApplicationTest {
+class HttpApiSinkApplicationTest {
 
     @DisplayName("should autowire successfully")
     @Test

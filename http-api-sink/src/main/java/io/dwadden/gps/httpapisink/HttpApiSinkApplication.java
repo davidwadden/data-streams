@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BatchSinkApplication {
+public class HttpApiSinkApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BatchSinkApplication.class, args);
+        SpringApplication.run(HttpApiSinkApplication.class, args);
     }
 }

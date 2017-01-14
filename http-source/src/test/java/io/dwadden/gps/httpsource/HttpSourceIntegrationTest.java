@@ -21,13 +21,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-class WidgetSourceIntegrationTest {
+class HttpSourceIntegrationTest {
 
     final Source source;
     final MessageCollector collector;
 
     @Autowired
-    WidgetSourceIntegrationTest(Source source, MessageCollector collector) {
+    HttpSourceIntegrationTest(Source source, MessageCollector collector) {
         this.source = source;
         this.collector = collector;
     }

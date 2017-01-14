@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Component
-public class AvroWidgetTransformer {
+public class WidgetTransformer {
 
     static Mapper dozerBeanMapper = new DozerBeanMapper();
 
