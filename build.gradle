@@ -36,7 +36,7 @@ subprojects {
     }
     ext['spring.version'] = '5.0.0.M4'
     ext['spring-cloud-stream.version'] = 'Brooklyn.SR1'
-    ext['kafka.version'] = '0.10.1.0'
+    ext['kafka.version'] = '0.10.1.1'
     ext['spring-integration-kafka.version'] = '2.1.0.RELEASE'
 
     sourceCompatibility = 1.8

@@ -9,6 +9,7 @@ dependencies {
     compile("org.apache.kafka:kafka-clients")
     compile("org.apache.kafka:kafka_2.11")
     compile("io.projectreactor:reactor-core")
+    compile("org.springframework.cloud:spring-cloud-stream-reactive")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.integration:spring-integration-test')
