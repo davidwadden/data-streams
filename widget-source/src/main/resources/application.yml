@@ -8,7 +8,7 @@ server.tomcat:
   accessLogPattern: "%a asdasd"
 
 ## kafka configuration
-spring.cloud.stream.bindings.output.destination: some-topic
+spring.cloud.stream.bindings.output.destination: widget-topic
 
 ## disable auth on /beans
 endpoints.beans.sensitive: false

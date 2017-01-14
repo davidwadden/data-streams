@@ -1,4 +1,9 @@
 ## sets the batch size
 batch-sink.batch-size: 3
 
-## sets
+## enables request logging
+server.tomcat.accessLogEnabled: true
+server.tomcat.accessLogPattern: "%a asdasd"
+
+## kafka configuration
+spring.cloud.stream.bindings.input.destination: widget-topic

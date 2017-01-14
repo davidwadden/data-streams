@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
 
 @SuppressWarnings("unused")
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Slf4j
+@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Component
 public class WidgetBatchFileHandler {
 

@@ -19,34 +19,36 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 class WidgetBatchFileHandlerTest {
 
     WidgetBatchFileHandler handler;
-    MockRestServiceServer server;
+    MockRestServiceServer mockServer;
 
     @BeforeEach
     void setUp() {
         RestTemplate restTemplate = new RestTemplate();
         handler = new WidgetBatchFileHandler(restTemplate);
-        server = MockRestServiceServer.createServer(restTemplate);
+        mockServer = MockRestServiceServer.createServer(restTemplate);
     }
 
     @Test
     void handleMessage() {
-        server
+        mockServer
             .expect(requestTo("http://localhost:8080/upload"))
-            .andExpect(
-                content().string("12345")
-            )
+            .andExpect(content().string("12345"))
             .andRespond(withStatus(HttpStatus.NO_CONTENT));
 
+        handler.handleMessage(makeAvroMessage());
+
+        mockServer.verify();
+    }
+
+    private static Message<AvroWidget> makeAvroMessage() {
         AvroWidget avroWidget = AvroWidget.newBuilder()
             .setKey(12345L)
             .setType("some-type")
             .setPayload("some-payload")
             .build();
-        Message<AvroWidget> avroMessage = MessageBuilder.withPayload(avroWidget).build();
-
-        handler.handleMessage(avroMessage);
-
-        server.verify();
+        return MessageBuilder
+            .withPayload(avroWidget)
+            .build();
     }
 
 }
