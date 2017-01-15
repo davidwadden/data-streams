@@ -13,8 +13,14 @@ dependencies {
     compile("org.apache.kafka:kafka-clients")
     compile("org.apache.kafka:kafka_2.11")
     compile("net.sf.dozer:dozer")
+    compile('com.fasterxml.jackson.module:jackson-module-parameter-names')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.integration:spring-integration-test')
     testCompile('org.springframework.cloud:spring-cloud-stream-test-support')
+    testCompile("net.javacrumbs.json-unit:json-unit")
+    testCompile("net.javacrumbs.json-unit:json-unit-fluent")
+    testCompile("net.javacrumbs.json-unit:json-unit-spring")
 }
