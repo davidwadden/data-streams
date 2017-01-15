@@ -1,11 +1,11 @@
-package io.dwadden.gps.httpsource;
+package io.dwadden.gps.entities;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.Builder;
 import lombok.Value;
 
-@JsonDeserialize(builder = Widget.IngestedPayloadBuilder.class)
+@JsonDeserialize(builder = Widget.WidgetBuilder.class)
 @Builder
 @Value
 public class Widget {
@@ -15,6 +15,6 @@ public class Widget {
     String payload;
 
     @JsonPOJOBuilder(withPrefix = "")
-    public static class IngestedPayloadBuilder {}
+    public static class WidgetBuilder {}
 
 }

@@ -1,5 +1,6 @@
 package io.dwadden.gps.httpsource;
 
+import io.dwadden.gps.entities.Widget;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;

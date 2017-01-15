@@ -1,5 +1,6 @@
 package io.dwadden.gps.httpsource;
 
+import io.dwadden.gps.entities.Widget;
 import org.springframework.stereotype.Component;
 
 @Component
