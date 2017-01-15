@@ -1,6 +1,6 @@
 {"namespace": "io.dwadden.gps.entities",
  "type": "record",
- "name": "AvroWidget",
+ "name": "AvroGpsWaypoint",
  "fields": [
      {"name": "key", "type": "long"},
      {"name": "type", "type": "string"},

@@ -1,6 +1,6 @@
 package io.dwadden.gps.httpapisink;
 
-import io.dwadden.gps.entities.AvroWidget;
+import io.dwadden.gps.entities.AvroGpsWaypoint;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
@@ -66,8 +66,8 @@ class HttpApiSinkIntegrationTest {
         executor.schedule(() -> mockServer.verify(), 1, TimeUnit.SECONDS);
     }
 
-    private static Message<AvroWidget> makeMessage() {
-        AvroWidget avroWidget = AvroWidget.newBuilder()
+    private static Message<AvroGpsWaypoint> makeMessage() {
+        AvroGpsWaypoint avroWidget = AvroGpsWaypoint.newBuilder()
             .setKey(12345L)
             .setType("some-type")
             .setPayload("some-payload")

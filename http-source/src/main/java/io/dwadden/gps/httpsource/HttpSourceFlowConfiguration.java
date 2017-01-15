@@ -35,13 +35,13 @@ public class HttpSourceFlowConfiguration {
     }
 
     @Bean
-    public IntegrationFlow flow(WidgetGenerator widgetGenerator,
-                                WidgetTransformer widgetTransformer) {
+    public IntegrationFlow flow(GpsWaypointGenerator gpsWaypointGenerator,
+                                GpsWaypointTransformer gpsWaypointTransformer) {
 
         return IntegrationFlows
             .from(this.longMessageSource(), c -> c.poller(Pollers.fixedRate(100L)))
-            .transform(widgetGenerator)
-            .transform(widgetTransformer)
+            .transform(gpsWaypointGenerator)
+            .transform(gpsWaypointTransformer)
             .channel(Source.OUTPUT)
             .get();
     }

@@ -1,6 +1,6 @@
 package io.dwadden.gps.httpapisink;
 
-import io.dwadden.gps.entities.AvroWidget;
+import io.dwadden.gps.entities.AvroGpsWaypoint;
 import org.reactivestreams.Publisher;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
@@ -27,7 +27,7 @@ public class HttpApiSinkFlowConfiguration {
     }
 
     @Bean
-    public Publisher<Message<AvroWidget>> reactiveFlow() {
+    public Publisher<Message<AvroGpsWaypoint>> reactiveFlow() {
         return IntegrationFlows
             .from(Sink.INPUT)
             .channel(MessageChannels.reactive())

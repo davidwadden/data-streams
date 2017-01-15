@@ -1,6 +1,6 @@
 package io.dwadden.gps.httpapisink;
 
-import io.dwadden.gps.entities.AvroWidget;
+import io.dwadden.gps.entities.AvroGpsWaypoint;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,14 +18,14 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class WidgetBatchFileHandlerTest {
+class GpsWaypointBatchFileHandlerTest {
 
     static final String API_ENDPOINT = "http://some.api/endpoint";
 
     HttpApiSinkProperties properties;
     MockRestServiceServer mockServer;
-    TestPublisher<Message<AvroWidget>> testPublisher;
-    WidgetBatchFileHandler handler;
+    TestPublisher<Message<AvroGpsWaypoint>> testPublisher;
+    HttpApiHandler handler;
 
     @BeforeEach
     void setUp() {
@@ -37,7 +37,7 @@ class WidgetBatchFileHandlerTest {
         properties.setBatchSize(3);
         properties.setUploadEndpoint(API_ENDPOINT);
 
-        handler = new WidgetBatchFileHandler(restTemplate, properties, testPublisher);
+        handler = new HttpApiHandler(restTemplate, properties, testPublisher);
     }
 
     @DisplayName("should handle widget and make HTTP API call")
@@ -53,8 +53,8 @@ class WidgetBatchFileHandlerTest {
         mockServer.verify();
     }
 
-    private static Message<AvroWidget> makeAvroMessage() {
-        AvroWidget avroWidget = AvroWidget.newBuilder()
+    private static Message<AvroGpsWaypoint> makeAvroMessage() {
+        AvroGpsWaypoint avroWidget = AvroGpsWaypoint.newBuilder()
             .setKey(12345L)
             .setType("some-type")
             .setPayload("some-payload")

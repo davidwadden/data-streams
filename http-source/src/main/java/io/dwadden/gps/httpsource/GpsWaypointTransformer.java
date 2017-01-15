@@ -1,7 +1,7 @@
 package io.dwadden.gps.httpsource;
 
-import io.dwadden.gps.entities.AvroWidget;
-import io.dwadden.gps.entities.Widget;
+import io.dwadden.gps.entities.AvroGpsWaypoint;
+import io.dwadden.gps.entities.GpsWaypoint;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.dozer.DozerBeanMapper;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Component
-public class WidgetTransformer {
+public class GpsWaypointTransformer {
 
     static Mapper dozerBeanMapper = new DozerBeanMapper();
 
-    public AvroWidget transform(Widget widget) {
+    public AvroGpsWaypoint transform(GpsWaypoint gpsWaypoint) {
 
-        return dozerBeanMapper.map(widget, AvroWidget.class);
+        return dozerBeanMapper.map(gpsWaypoint, AvroGpsWaypoint.class);
     }
 
 }

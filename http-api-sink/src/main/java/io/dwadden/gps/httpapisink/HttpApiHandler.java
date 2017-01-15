@@ -1,6 +1,6 @@
 package io.dwadden.gps.httpapisink;
 
-import io.dwadden.gps.entities.AvroWidget;
+import io.dwadden.gps.entities.AvroGpsWaypoint;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -14,17 +14,17 @@ import reactor.core.publisher.Flux;
 @Slf4j
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Component
-public class WidgetBatchFileHandler {
+public class HttpApiHandler {
 
     RestOperations restOperations;
     HttpApiSinkProperties httpApiSinkProperties;
     @SuppressWarnings("unused")
-    Publisher<Message<AvroWidget>> publisher;
+    Publisher<Message<AvroGpsWaypoint>> publisher;
 
     @Autowired
-    public WidgetBatchFileHandler(RestOperations restOperations,
-                                  HttpApiSinkProperties httpApiSinkProperties,
-                                  Publisher<Message<AvroWidget>> publisher) {
+    public HttpApiHandler(RestOperations restOperations,
+                          HttpApiSinkProperties httpApiSinkProperties,
+                          Publisher<Message<AvroGpsWaypoint>> publisher) {
         this.restOperations = restOperations;
         this.httpApiSinkProperties = httpApiSinkProperties;
         this.publisher = publisher;
@@ -32,7 +32,7 @@ public class WidgetBatchFileHandler {
         // Sets up subscription to Publisher
         Flux.from(publisher)
             .map(Message::getPayload)
-            .map(AvroWidget::getKey)
+            .map(AvroGpsWaypoint::getKey)
             .doOnNext(this::uploadWidget)
             .subscribe();
     }

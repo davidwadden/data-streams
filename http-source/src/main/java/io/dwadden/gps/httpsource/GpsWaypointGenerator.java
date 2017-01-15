@@ -1,14 +1,14 @@
 package io.dwadden.gps.httpsource;
 
-import io.dwadden.gps.entities.Widget;
+import io.dwadden.gps.entities.GpsWaypoint;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WidgetGenerator {
+public class GpsWaypointGenerator {
 
-    public Widget transform(Long key) {
+    public GpsWaypoint transform(Long key) {
 
-        return Widget.builder()
+        return GpsWaypoint.builder()
             .key(key)
             .type("some-type")
             .payload("some-payload")

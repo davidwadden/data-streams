@@ -1,6 +1,6 @@
 package io.dwadden.gps.httpsource;
 
-import io.dwadden.gps.entities.AvroWidget;
+import io.dwadden.gps.entities.AvroGpsWaypoint;
 import lombok.AccessLevel;
 import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
@@ -39,9 +39,9 @@ class HttpSourceIntegrationTest {
         Message<?> msg = collector.forChannel(source.output()).poll(1, TimeUnit.SECONDS);
 
         assertThat(msg).isNotNull();
-        assertThat(msg.getPayload()).isExactlyInstanceOf(AvroWidget.class);
+        assertThat(msg.getPayload()).isExactlyInstanceOf(AvroGpsWaypoint.class);
 
-        AvroWidget widget = (AvroWidget) msg.getPayload();
+        AvroGpsWaypoint widget = (AvroGpsWaypoint) msg.getPayload();
         assertThat(widget.getKey()).isEqualTo(0);
     }
 }
