@@ -5,6 +5,7 @@ buildscript {
     }
     repositories {
         mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
         maven { url "https://repo.spring.io/milestone" }
     }
     dependencies {
@@ -53,8 +54,6 @@ subprojects {
 
         testCompile("org.junit.jupiter:junit-jupiter-api")
         testRuntime("org.junit.jupiter:junit-jupiter-engine")
-        // see: https://github.com/junit-team/junit5/issues/586#issuecomment-265012600
-        testCompile("org.junit.platform:junit-platform-launcher")
         testCompile("org.mockito:mockito-core")
         testCompile("org.assertj:assertj-core")
         testCompileOnly('org.projectlombok:lombok')
@@ -87,7 +86,6 @@ subprojects {
 
             dependency "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
             dependency "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-            dependency "org.junit.platform:junit-platform-launcher:${junitPluginVersion}"
             dependency "org.mockito:mockito-core:${mockitoVersion}"
             dependency "org.assertj:assertj-core:${assertJVersion}"
             dependency "org.skyscreamer:jsonassert:${jsonAssertVersion}"
