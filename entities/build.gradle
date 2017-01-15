@@ -5,5 +5,6 @@ plugins {
 bootRepackage.enabled = false
 
 dependencies {
-    compile("org.apache.avro:avro:${avroVersion}")
+    compile("org.apache.avro:avro")
+    compile("com.fasterxml.jackson.core:jackson-databind")
 }
