@@ -1,5 +1,6 @@
 package io.dwadden.gps.fakes;
 
+import io.dwadden.gps.entities.RawGpsWaypoint;
 import lombok.AccessLevel;
 import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
@@ -21,7 +22,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
-import static org.springframework.test.web.client.ExpectedCount.between;
+import static org.springframework.test.web.client.ExpectedCount.min;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
@@ -63,7 +64,7 @@ class GpsWaypointHttpGatewayIntegrationTest {
         properties.setEndpoint("http://some.api/endpoint");
 
         mockServer
-            .expect(between(3, 5), requestTo("http://some.api/endpoint"))
+            .expect(min(3), requestTo("http://some.api/endpoint"))
             .andExpect(request -> postBody = request.getBody().toString())
             .andRespond(withStatus(HttpStatus.ACCEPTED));
 

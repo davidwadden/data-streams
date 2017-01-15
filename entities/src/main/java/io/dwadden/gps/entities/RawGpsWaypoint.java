@@ -1,11 +1,14 @@
-package io.dwadden.gps.fakes;
+package io.dwadden.gps.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.Builder;
 import lombok.Value;
 
 import java.time.Instant;
 
+@JsonDeserialize(builder = RawGpsWaypoint.RawGpsWaypointBuilder.class)
 @Builder
 @Value
 public class RawGpsWaypoint {
@@ -21,5 +24,8 @@ public class RawGpsWaypoint {
         timezone = "UTC"
     )
     Instant timestamp;
+
+    @JsonPOJOBuilder(withPrefix = "")
+    public static class RawGpsWaypointBuilder {}
 
 }

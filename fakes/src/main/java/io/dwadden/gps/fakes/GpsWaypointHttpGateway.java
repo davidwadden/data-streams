@@ -1,5 +1,6 @@
 package io.dwadden.gps.fakes;
 
+import io.dwadden.gps.entities.RawGpsWaypoint;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;

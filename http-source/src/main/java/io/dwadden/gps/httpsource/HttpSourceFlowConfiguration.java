@@ -1,19 +1,20 @@
 package io.dwadden.gps.httpsource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.config.EnableIntegration;
-import org.springframework.integration.core.MessageSource;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
-import org.springframework.integration.dsl.Pollers;
-import org.springframework.integration.endpoint.MethodInvokingMessageSource;
-import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.integration.dsl.Transformers;
+import org.springframework.integration.json.JsonToObjectTransformer;
+import org.springframework.integration.json.ObjectToJsonTransformer;
+import org.springframework.integration.support.json.Jackson2JsonObjectMapper;
+import org.springframework.messaging.MessageChannel;
 
 @SuppressWarnings("unused")
 @EnableIntegration
@@ -22,26 +23,38 @@ import java.util.concurrent.atomic.AtomicLong;
 public class HttpSourceFlowConfiguration {
 
     @Bean
-    public RestOperations restOperations() {
-        return new RestTemplate();
+    public ObjectMapper objectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        return mapper;
     }
 
     @Bean
-    public MessageSource<?> longMessageSource() {
-        MethodInvokingMessageSource source = new MethodInvokingMessageSource();
-        source.setObject(new AtomicLong());
-        source.setMethodName("getAndIncrement");
-        return source;
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setObjectMapper(objectMapper());
+        return converter;
     }
 
     @Bean
-    public IntegrationFlow flow(GpsWaypointGenerator gpsWaypointGenerator,
-                                GpsWaypointTransformer gpsWaypointTransformer) {
+    public ObjectToJsonTransformer objectToJsonTransformer(ObjectMapper objectMapper) {
+        return Transformers.toJson(new Jackson2JsonObjectMapper(objectMapper));
+    }
+
+    @Bean
+    public MessageChannel listenHttpChannel() {
+        return new DirectChannel();
+    }
+
+    @Bean
+    public IntegrationFlow flow(MessageChannel listenHttpChannel,
+                                ObjectToJsonTransformer objectToJsonTransformer,
+                                AssignKeyTransformer assignKeyTransformer) {
 
         return IntegrationFlows
-            .from(this.longMessageSource(), c -> c.poller(Pollers.fixedRate(100L)))
-            .transform(gpsWaypointGenerator)
-            .transform(gpsWaypointTransformer)
+            .from(listenHttpChannel)
+            .transform(assignKeyTransformer)
+            .transform(objectToJsonTransformer)
             .channel(Source.OUTPUT)
             .get();
     }
