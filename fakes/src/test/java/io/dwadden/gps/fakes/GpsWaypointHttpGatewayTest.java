@@ -1,5 +1,6 @@
 package io.dwadden.gps.fakes;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,10 +8,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static net.javacrumbs.jsonunit.fluent.JsonFluentAssert.assertThatJson;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
@@ -30,6 +33,13 @@ class GpsWaypointHttpGatewayTest {
         properties = new GpsWaypointHttpGatewayProperties();
         RestTemplate restTemplate = new RestTemplate();
         mockServer = MockRestServiceServer.createServer(restTemplate);
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setObjectMapper(mapper);
+        restTemplate.getMessageConverters().add(0, converter);
+
         gateway = new GpsWaypointHttpGateway(properties, restTemplate);
     }
 
@@ -47,7 +57,13 @@ class GpsWaypointHttpGatewayTest {
 
         mockServer.verify();
 
-        assertThat(postBody).isEqualTo("some-request");
+        assertAll(
+            () -> assertThatJson(postBody).node("latitude").isEqualTo(41.921855),
+            () -> assertThatJson(postBody).node("longitude").isEqualTo(-87.633487),
+            () -> assertThatJson(postBody).node("heading").isEqualTo(290),
+            () -> assertThatJson(postBody).node("speed").isEqualTo(72),
+            () -> assertThatJson(postBody).node("timestamp").isEqualTo("2017-01-15T07:55:54Z")
+        );
     }
 
 }

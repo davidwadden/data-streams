@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
 
+import java.time.Instant;
+
 @Slf4j
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @EnableConfigurationProperties(GpsWaypointHttpGatewayProperties.class)
@@ -34,7 +36,15 @@ public class GpsWaypointHttpGateway {
     public void sendRequest() {
         logger.info("sending HTTP request from Gateway");
 
-        restOperations.postForEntity(properties.getEndpoint(), "some-request", null);
+        RawGpsWaypoint rawWaypoint = RawGpsWaypoint.builder()
+            .latitude(41.921855d)
+            .longitude(-87.633487d)
+            .heading(290)
+            .speed(72)
+            .timestamp(Instant.ofEpochSecond(1484466954L))
+            .build();
+
+        restOperations.postForEntity(properties.getEndpoint(), rawWaypoint, null);
     }
 
 }

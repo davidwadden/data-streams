@@ -7,6 +7,9 @@ dependencies {
 
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('com.fasterxml.jackson.module:jackson-module-parameter-names')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
+    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("net.javacrumbs.json-unit:json-unit")
