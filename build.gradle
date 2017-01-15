@@ -34,6 +34,7 @@ subprojects {
         jsonAssertVersion = '1.4.0'
         dozerVersion = '5.5.1'
         reactorVersion = '3.0.4.RELEASE'
+        jsonUnitVersion = '1.18.0'
     }
     ext['spring.version'] = '5.0.0.M4'
     ext['spring-cloud-stream.version'] = 'Brooklyn.SR1'
@@ -83,6 +84,12 @@ subprojects {
             dependency "org.apache.avro:avro:${avroVersion}"
             dependency "net.sf.dozer:dozer:${dozerVersion}"
             dependency "io.projectreactor:reactor-core:${reactorVersion}"
+
+            dependencySet(group: 'net.javacrumbs.json-unit', version: "${jsonUnitVersion}".toString()) {
+                entry 'json-unit'
+                entry 'json-unit-fluent'
+                entry 'json-unit-spring'
+            }
 
             dependency "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
             dependency "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
