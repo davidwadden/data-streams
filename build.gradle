@@ -108,4 +108,9 @@ subprojects {
 
 }
 
-task bootRunAll(dependsOn: [':http-source:bootRun', ':http-api-sink:bootRun', ':fakes:bootRun']) {}
+task bootRunAll(dependsOn: [
+        ':http-source:bootRun',
+        ':http-api-sink:bootRun',
+        ':avro-processor:bootRun',
+        ':fakes:bootRun'
+]) {}

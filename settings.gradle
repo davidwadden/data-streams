@@ -1,5 +1,6 @@
 rootProject.name = "gps-streams"
 
+include 'avro-processor'
 include 'entities'
 include 'fakes'
 include 'http-api-sink'

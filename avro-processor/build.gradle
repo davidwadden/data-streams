@@ -1,13 +1,13 @@
 jar {
-    baseName = 'http-source'
+    baseName = 'avro-processor'
 }
 
 dependencies {
     compile project(':entities')
 
     compile('org.springframework.boot:spring-boot-starter-actuator')
-    compile('org.springframework.cloud:spring-cloud-starter-stream-kafka')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.cloud:spring-cloud-starter-stream-kafka')
     compile("org.springframework.integration:spring-integration-kafka")
     compile("org.springframework.integration:spring-integration-core")
     compile("org.apache.kafka:kafka-clients")
@@ -19,7 +19,4 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.integration:spring-integration-test')
     testCompile('org.springframework.cloud:spring-cloud-stream-test-support')
-    testCompile("net.javacrumbs.json-unit:json-unit")
-    testCompile("net.javacrumbs.json-unit:json-unit-fluent")
-    testCompile("net.javacrumbs.json-unit:json-unit-spring")
 }
