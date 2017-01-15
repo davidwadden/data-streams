@@ -8,7 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class AvroProcessorApplicationTest {
+class AvroProcessorApplicationTest {
 
     @DisplayName("should autowire successfully")
     @Test

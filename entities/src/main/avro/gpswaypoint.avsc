@@ -2,8 +2,11 @@
  "type": "record",
  "name": "AvroGpsWaypoint",
  "fields": [
-     {"name": "key", "type": "long"},
-     {"name": "type", "type": "string"},
-     {"name": "payload", "type": ["string", "null"]}
+     {"name": "id", "type": "long"},
+     {"name": "latitude", "type": "double"},
+     {"name": "longitude", "type": "double"},
+     {"name": "heading", "type": "int"},
+     {"name": "speed", "type": "int"},
+     {"name": "timestamp", "type": "long"}
  ]
 }

@@ -57,7 +57,7 @@ class HttpApiSinkIntegrationTest {
     void batchSink() {
         mockServer
             .expect(requestTo("http://some.api/endpoint"))
-            .andExpect(content().string("12345"))
+            .andExpect(content().string("2001"))
             .andRespond(withStatus(HttpStatus.NO_CONTENT));
 
         sink.input().send(makeMessage());
@@ -68,9 +68,12 @@ class HttpApiSinkIntegrationTest {
 
     private static Message<AvroGpsWaypoint> makeMessage() {
         AvroGpsWaypoint avroWidget = AvroGpsWaypoint.newBuilder()
-            .setKey(12345L)
-            .setType("some-type")
-            .setPayload("some-payload")
+            .setId(2001L)
+            .setLatitude(41.921855d)
+            .setLongitude(-87.633487d)
+            .setHeading(290)
+            .setSpeed(72)
+            .setTimestamp(1484466954L)
             .build();
 
         return MessageBuilder

@@ -10,4 +10,4 @@ server.tomcat.accessLogEnabled: true
 server.tomcat.accessLogPattern: "%a asdasd"
 
 ## kafka configuration
-spring.cloud.stream.bindings.input.destination: new-waypoint
+spring.cloud.stream.bindings.input.destination: avro-waypoint

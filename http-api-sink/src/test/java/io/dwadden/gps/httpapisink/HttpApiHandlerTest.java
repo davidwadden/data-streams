@@ -13,12 +13,15 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestTemplate;
 import reactor.test.publisher.TestPublisher;
 
+import java.time.Instant;
+
+import static org.assertj.core.api.Assertions.fail;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
-class GpsWaypointBatchFileHandlerTest {
+class HttpApiHandlerTest {
 
     static final String API_ENDPOINT = "http://some.api/endpoint";
 
@@ -45,7 +48,7 @@ class GpsWaypointBatchFileHandlerTest {
     void handleMessage() {
         mockServer
             .expect(requestTo(API_ENDPOINT))
-            .andExpect(content().string("12345"))
+            .andExpect(content().string("2001"))
             .andRespond(withStatus(HttpStatus.NO_CONTENT));
 
         testPublisher.next(makeAvroMessage());
@@ -55,10 +58,14 @@ class GpsWaypointBatchFileHandlerTest {
 
     private static Message<AvroGpsWaypoint> makeAvroMessage() {
         AvroGpsWaypoint avroWidget = AvroGpsWaypoint.newBuilder()
-            .setKey(12345L)
-            .setType("some-type")
-            .setPayload("some-payload")
+            .setId(2001L)
+            .setLatitude(41.921855d)
+            .setLongitude(-87.633487d)
+            .setHeading(290)
+            .setSpeed(72)
+            .setTimestamp(1484466954L)
             .build();
+
         return MessageBuilder
             .withPayload(avroWidget)
             .build();

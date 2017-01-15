@@ -32,7 +32,7 @@ public class HttpApiHandler {
         // Sets up subscription to Publisher
         Flux.from(publisher)
             .map(Message::getPayload)
-            .map(AvroGpsWaypoint::getKey)
+            .map(AvroGpsWaypoint::getId)
             .doOnNext(this::uploadWidget)
             .subscribe();
     }

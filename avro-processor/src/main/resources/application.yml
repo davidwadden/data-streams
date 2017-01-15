@@ -1,2 +1,6 @@
 ## sets the bind port
 server.port: 8093
+
+## kafka configuration
+spring.cloud.stream.bindings.input.destination: json-waypoint
+spring.cloud.stream.bindings.output.destination: avro-waypoint
