@@ -37,7 +37,10 @@ class JsonToAvroTransformerTest {
         AvroGpsWaypoint avroWaypoint = transformer.transform(waypointJson);
 
         assertAll(
-            () -> assertThat(avroWaypoint).isEqualToIgnoringGivenFields(gpsWaypoint, "timestamp"),
+            () -> assertThat(avroWaypoint)
+                .isEqualToIgnoringGivenFields(gpsWaypoint, "latitude", "longitude", "timestamp"),
+            () -> assertThat(avroWaypoint.getLatitude()).isEqualTo((int) (gpsWaypoint.getLatitude() * 10e6)),
+            () -> assertThat(avroWaypoint.getLongitude()).isEqualTo((int) (gpsWaypoint.getLongitude() * 10e6)),
             () -> assertThat(avroWaypoint.getTimestamp()).isEqualTo(1484466954L)
         );
     }

@@ -29,8 +29,8 @@ public class JsonToAvroTransformer {
 
         return AvroGpsWaypoint.newBuilder()
             .setId(gpsWaypoint.getId())
-            .setLatitude(gpsWaypoint.getLatitude())
-            .setLongitude(gpsWaypoint.getLongitude())
+            .setLatitude((int) (gpsWaypoint.getLatitude() * 10e6))
+            .setLongitude((int) (gpsWaypoint.getLongitude() * 10e6))
             .setHeading(gpsWaypoint.getHeading())
             .setSpeed(gpsWaypoint.getSpeed())
             .setTimestamp(gpsWaypoint.getTimestamp().getEpochSecond())

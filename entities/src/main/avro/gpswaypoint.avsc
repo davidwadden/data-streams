@@ -3,8 +3,8 @@
  "name": "AvroGpsWaypoint",
  "fields": [
      {"name": "id", "type": "long"},
-     {"name": "latitude", "type": "double"},
-     {"name": "longitude", "type": "double"},
+     {"name": "latitude", "type": "int"},
+     {"name": "longitude", "type": "int"},
      {"name": "heading", "type": "int"},
      {"name": "speed", "type": "int"},
      {"name": "timestamp", "type": "long"}

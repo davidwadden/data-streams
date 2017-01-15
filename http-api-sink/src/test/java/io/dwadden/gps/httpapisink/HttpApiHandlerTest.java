@@ -59,8 +59,8 @@ class HttpApiHandlerTest {
     private static Message<AvroGpsWaypoint> makeAvroMessage() {
         AvroGpsWaypoint avroWidget = AvroGpsWaypoint.newBuilder()
             .setId(2001L)
-            .setLatitude(41.921855d)
-            .setLongitude(-87.633487d)
+            .setLatitude(41921855)
+            .setLongitude(-87633487)
             .setHeading(290)
             .setSpeed(72)
             .setTimestamp(1484466954L)
