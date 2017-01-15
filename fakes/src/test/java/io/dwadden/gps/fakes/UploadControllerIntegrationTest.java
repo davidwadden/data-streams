@@ -14,12 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class FakesIntegrationTest {
+class UploadControllerIntegrationTest {
 
     final TestRestTemplate testRestTemplate;
 
     @Autowired
-    FakesIntegrationTest(TestRestTemplate testRestTemplate) {
+    UploadControllerIntegrationTest(TestRestTemplate testRestTemplate) {
         this.testRestTemplate = testRestTemplate;
     }
 

@@ -1,2 +1,5 @@
 ## sets the bind port
 server.port: 8090
+
+## http gateway endpoint
+http-gateway.endpoint: http://localhost:8090/ingest
