@@ -30,9 +30,9 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.NONE,
     properties = {
-        "httpGateway.initialDelay=100",
-        "httpGateway.fixedDelay=100",
-        "httpGateway.endpoint=http://some.api/endpoint",
+        "http-gateway.initial-delay=100",
+        "http-gateway.fixed-delay=100",
+        "http-gateway.endpoint=http://some.api/endpoint",
     }
 )
 class GpsWaypointHttpGatewayIntegrationTest {
