@@ -2,4 +2,6 @@
 server.port: 8090
 
 ## http gateway endpoint
-http-gateway.endpoint: http://localhost:8090/ingest
+http-gateway.initial-delay: 10000
+http-gateway.fixed-delay: 100
+http-gateway.endpoint: http://localhost:8091/ingest

@@ -10,6 +10,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "httpGateway")
 public class GpsWaypointHttpGatewayProperties {
 
+    Integer initialDelay;
+    Integer fixedDelay;
     String endpoint;
 
 }

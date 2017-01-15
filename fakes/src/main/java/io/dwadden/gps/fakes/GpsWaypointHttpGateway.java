@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
 
@@ -26,6 +27,10 @@ public class GpsWaypointHttpGateway {
         this.restOperations = restOperations;
     }
 
+    @Scheduled(
+        initialDelayString = "${http-gateway.initial-delay}",
+        fixedDelayString = "${http-gateway.fixed-delay}"
+    )
     public void sendRequest() {
         logger.info("sending HTTP request from Gateway");
 

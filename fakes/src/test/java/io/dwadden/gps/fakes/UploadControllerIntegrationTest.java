@@ -13,7 +13,14 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+    properties = {
+        "httpGateway.initialDelay=10000",
+        "httpGateway.fixedDelay=1000",
+        "httpGateway.endpoint=http://some.api/endpoint",
+    }
+)
 class UploadControllerIntegrationTest {
 
     final TestRestTemplate testRestTemplate;

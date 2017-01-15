@@ -33,7 +33,7 @@ class GpsWaypointHttpGatewayTest {
         gateway = new GpsWaypointHttpGateway(properties, restTemplate);
     }
 
-    @DisplayName("")
+    @DisplayName("should make HTTP calls to ingestor endpoint")
     @Test
     void sendRequest() {
         properties.setEndpoint("http://some.api/endpoint");
