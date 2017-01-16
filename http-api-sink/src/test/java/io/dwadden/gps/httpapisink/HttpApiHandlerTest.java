@@ -54,6 +54,7 @@ class HttpApiHandlerTest {
         testPublisher.next(makeAvroMessage());
 
         mockServer.verify();
+        testPublisher.assertSubscribers();
     }
 
     private static Message<AvroGpsWaypoint> makeAvroMessage() {
