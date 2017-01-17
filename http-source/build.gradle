@@ -23,3 +23,15 @@ dependencies {
     testCompile("net.javacrumbs.json-unit:json-unit-fluent")
     testCompile("net.javacrumbs.json-unit:json-unit-spring")
 }
+
+bootRun {
+    jvmArgs = [
+        "-Xms1g",
+        "-Xmx1g",
+        // "-XX:+PrintGC",
+        "-XX:+PrintGCDetails",
+        "-XX:+PrintGCTimeStamps",
+        "-XX:+PrintGCDateStamps",
+        "-Xloggc:/tmp/http-source.gc.log"
+    ]
+}

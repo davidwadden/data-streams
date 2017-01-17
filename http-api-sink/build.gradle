@@ -20,3 +20,15 @@ dependencies {
     testCompile('org.springframework.cloud:spring-cloud-stream-test-support')
     testCompile("io.projectreactor.addons:reactor-test")
 }
+
+bootRun {
+    jvmArgs = [
+        "-Xms1g",
+        "-Xmx1g",
+        // "-XX:+PrintGC",
+        "-XX:+PrintGCDetails",
+        "-XX:+PrintGCTimeStamps",
+        "-XX:+PrintGCDateStamps",
+        "-Xloggc:/tmp/http-api-sink.gc.log"
+    ]
+}
