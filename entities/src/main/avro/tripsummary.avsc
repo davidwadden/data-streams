@@ -1,0 +1,21 @@
+{
+    "namespace": "io.dwadden.gps.entities",
+    "type": "record",
+    "name": "AvroTripSummary",
+    "fields": [
+        {"name": "id", "type": "long"},
+        {"name": "symbol", "type": {"type": "enum", "name": "AvroSymbolEnum", "symbols": ["A", "B", "C", "D"]}},
+        {"name": "gyros", "type": {
+            "type": "array",
+            "items": {
+                "type": "record",
+                "name": "AvroGyroDetail",
+                "fields": [
+                    {"name": "roll", "type": "double"},
+                    {"name": "pitch", "type": "double"},
+                    {"name": "yaw", "type": "double"}
+                ]
+            }
+        }}
+    ]
+}
