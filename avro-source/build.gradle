@@ -15,6 +15,7 @@ dependencies {
     compile('com.fasterxml.jackson.module:jackson-module-parameter-names')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
     compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+    compile('net.sf.dozer:dozer:5.5.1')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.integration:spring-integration-test')

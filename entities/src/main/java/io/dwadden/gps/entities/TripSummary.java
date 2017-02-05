@@ -14,7 +14,7 @@ public class TripSummary {
 
     Long id;
     SymbolEnum symbol;
-    List<GyroDetail> gyroDetails;
+    List<GyroDetail> gyros;
 
     @JsonPOJOBuilder(withPrefix = "")
     public static class TripSummaryBuilder {}
