@@ -8,3 +8,7 @@ dependencies {
     compile("org.apache.avro:avro")
     compile("com.fasterxml.jackson.core:jackson-databind")
 }
+
+configurations.all {
+    exclude group: 'junit', module: 'junit'
+}

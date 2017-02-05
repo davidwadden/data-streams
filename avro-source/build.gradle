@@ -25,6 +25,10 @@ dependencies {
     testCompile("net.javacrumbs.json-unit:json-unit-spring")
 }
 
+configurations.all {
+    exclude group: 'junit', module: 'junit'
+}
+
 bootRun {
     jvmArgs = [
         "-Xms1g",

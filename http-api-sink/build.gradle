@@ -21,6 +21,10 @@ dependencies {
     testCompile("io.projectreactor.addons:reactor-test")
 }
 
+configurations.all {
+    exclude group: 'junit', module: 'junit'
+}
+
 bootRun {
     jvmArgs = [
         "-Xms1g",
